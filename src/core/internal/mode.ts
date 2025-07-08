@@ -447,8 +447,9 @@ export async function getAuthorizedExecuteKey(parameters: {
     if (key.role !== 'session') return false
     if (key.expiry < BigInt(Math.floor(Date.now() / 1000))) return false
 
-    const hasValidScope = key.permissions?.calls?.some((scope) =>
-      calls.some((call) => {
+    // Check if every call is covered by a call permission.
+    const hasValidScope = calls.every((call) =>
+      key.permissions?.calls?.some((scope) => {
         if (scope.to && scope.to !== call.to) return false
         if (scope.signature) {
           if (!call.data) return false

@@ -1153,13 +1153,16 @@ async function getMerchantRpcUrl(
     // If there is a cached flag, we will return the URL if it is set up.
     const merchantRpcUrl_storage = await storage.getItem('porto.merchant-rpc')
     if (typeof merchantRpcUrl_storage === 'boolean')
-      return defaultMerchantRpcUrl
+      return merchantRpcUrl_storage ? defaultMerchantRpcUrl : undefined
 
     // Fetch on the default Merchant RPC URL to see if it is set up.
     const response = await fetch(defaultMerchantRpcUrl)
       .then((x) => x.text())
       .catch(() => undefined)
-    if (response !== 'hello porto') return undefined
+    if (response !== 'hello porto') {
+      await storage.setItem('porto.merchant-rpc', false)
+      return undefined
+    }
 
     // If set up, we will cache the flag.
     await storage.setItem('porto.merchant-rpc', true)
