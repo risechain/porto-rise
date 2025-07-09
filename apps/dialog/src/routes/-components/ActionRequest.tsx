@@ -187,116 +187,109 @@ export namespace ActionRequest {
     }, [props.assetDiff, account?.address])
 
     return (
-      <>
-        <div className="space-y-2">
-          {balances.map((balance) => {
-            const { address, direction, symbol, value } = balance
-            if (value === BigInt(0)) return null
+      <div className="space-y-2">
+        {balances.map((balance) => {
+          const { address, direction, symbol, value } = balance
+          if (value === BigInt(0)) return null
 
-            const receiving = direction === 'incoming'
-            const absoluteValue = value < 0n ? -value : value
-            const formatted = ValueFormatter.format(
-              absoluteValue,
-              'decimals' in balance ? (balance.decimals ?? 0) : 0,
-            )
+          const receiving = direction === 'incoming'
+          const absoluteValue = value < 0n ? -value : value
+          const formatted = ValueFormatter.format(
+            absoluteValue,
+            'decimals' in balance ? (balance.decimals ?? 0) : 0,
+          )
 
-            if (balance.type === 'erc721') {
-              const { name, uri } = balance
-              // Right now we only handle the ERC721 Metadata JSON Schema
-              // TODO: Parse other content types (audio, video, document)
-              const decoded = (() => {
-                try {
-                  const base64Data = uri.split(',')[1]
-                  if (!base64Data) return
-                  const json = JSON.parse(Base64.toString(base64Data))
-                  if ('image' in json && typeof json.image === 'string')
-                    return { type: 'image', url: json.image as string }
-                } catch {
-                  return
-                }
-              })()
-              return (
-                <div
-                  className="flex items-center gap-3 font-medium"
-                  key={address}
-                >
-                  <div className="relative flex size-6 items-center justify-center rounded-sm bg-gray6">
-                    {decoded?.type === 'image' ? (
-                      <img
-                        alt={name ?? symbol}
-                        className="size-full rounded-sm object-cover text-transparent"
-                        src={decoded.url}
-                      />
-                    ) : decoded?.type === 'audio' ? (
-                      <LucideMusic className="size-4 text-gray10" />
-                    ) : decoded?.type === 'video' ? (
-                      <LucideVideo className="size-4 text-gray10" />
-                    ) : decoded?.type === 'document' ? (
-                      <LucideFileText className="size-4 text-gray10" />
-                    ) : (
-                      <LucideSparkles className="size-4 text-gray10" />
-                    )}
-
-                    <div
-                      className={cx(
-                        '-tracking-[0.25] -bottom-1.5 -end-2 absolute flex size-4 items-center justify-center rounded-full font-medium text-[11px] outline-2 outline-gray3',
-                        receiving
-                          ? 'bg-successTint text-success'
-                          : 'bg-gray5 text-current',
-                      )}
-                    >
-                      {/* TODO: Return erc721 count in API response */}
-                      {receiving ? 1 : -1}
-                    </div>
-                  </div>
-                  <div className="flex flex-1 justify-between">
-                    {name || symbol ? (
-                      <span className="text-gray12">{name || symbol}</span>
-                    ) : (
-                      <span className="text-gray9">No name provided</span>
-                    )}
-                    <span className="text-gray10">#{absoluteValue}</span>
-                  </div>
-                </div>
-              )
-            }
-
-            const Icon = receiving ? ArrowDownLeft : ArrowUpRight
+          if (balance.type === 'erc721') {
+            const { name, uri } = balance
+            // Right now we only handle the ERC721 Metadata JSON Schema
+            // TODO: Parse other content types (audio, video, document)
+            const decoded = (() => {
+              try {
+                const base64Data = uri.split(',')[1]
+                if (!base64Data) return
+                const json = JSON.parse(Base64.toString(base64Data))
+                if ('image' in json && typeof json.image === 'string')
+                  return { type: 'image', url: json.image as string }
+              } catch {
+                return
+              }
+            })()
             return (
               <div
-                className="flex items-center gap-2 font-medium"
+                className="flex items-center gap-3 font-medium"
                 key={address}
               >
-                <div
-                  className={cx(
-                    'flex size-6 items-center justify-center rounded-full',
-                    {
-                      'bg-gray5': !receiving,
-                      'bg-successTint': receiving,
-                    },
+                <div className="relative flex size-6 items-center justify-center rounded-sm bg-gray6">
+                  {decoded?.type === 'image' ? (
+                    <img
+                      alt={name ?? symbol}
+                      className="size-full rounded-sm object-cover text-transparent"
+                      src={decoded.url}
+                    />
+                  ) : decoded?.type === 'audio' ? (
+                    <LucideMusic className="size-4 text-gray10" />
+                  ) : decoded?.type === 'video' ? (
+                    <LucideVideo className="size-4 text-gray10" />
+                  ) : decoded?.type === 'document' ? (
+                    <LucideFileText className="size-4 text-gray10" />
+                  ) : (
+                    <LucideSparkles className="size-4 text-gray10" />
                   )}
-                >
-                  <Icon
-                    className={cx('size-4 text-current', {
-                      'text-secondary': !receiving,
-                      'text-success': receiving,
-                    })}
-                  />
-                </div>
-                <div>
-                  {receiving ? 'Receive' : 'Send'}{' '}
-                  <span
-                    className={receiving ? 'text-success' : 'text-secondary'}
+
+                  <div
+                    className={cx(
+                      '-tracking-[0.25] -bottom-1.5 -end-2 absolute flex size-4 items-center justify-center rounded-full font-medium text-[11px] outline-2 outline-gray3',
+                      receiving
+                        ? 'bg-successTint text-success'
+                        : 'bg-gray5 text-current',
+                    )}
                   >
-                    {formatted}
-                  </span>{' '}
-                  {symbol}
+                    {/* TODO: Return erc721 count in API response */}
+                    {receiving ? 1 : -1}
+                  </div>
+                </div>
+                <div className="flex flex-1 justify-between">
+                  {name || symbol ? (
+                    <span className="text-gray12">{name || symbol}</span>
+                  ) : (
+                    <span className="text-gray9">No name provided</span>
+                  )}
+                  <span className="text-gray10">#{absoluteValue}</span>
                 </div>
               </div>
             )
-          })}
-        </div>
-      </>
+          }
+
+          const Icon = receiving ? ArrowDownLeft : ArrowUpRight
+          return (
+            <div className="flex items-center gap-2 font-medium" key={address}>
+              <div
+                className={cx(
+                  'flex size-6 items-center justify-center rounded-full',
+                  {
+                    'bg-gray5': !receiving,
+                    'bg-successTint': receiving,
+                  },
+                )}
+              >
+                <Icon
+                  className={cx('size-4 text-current', {
+                    'text-secondary': !receiving,
+                    'text-success': receiving,
+                  })}
+                />
+              </div>
+              <div>
+                {receiving ? 'Receive' : 'Send'}{' '}
+                <span className={receiving ? 'text-success' : 'text-secondary'}>
+                  {formatted}
+                </span>{' '}
+                {symbol}
+              </div>
+            </div>
+          )
+        })}
+      </div>
     )
   }
 
