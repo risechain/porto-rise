@@ -440,6 +440,13 @@ describe.each([
           expiry: null,
           hash: null,
           id: null,
+          permissions: {
+            ...permissions.permissions,
+            spend: permissions.permissions?.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
           publicKey: null,
         })),
       ).matchSnapshot()
