@@ -144,7 +144,7 @@ export function create(
 ): Porto {
   const {
     chains = defaultConfig.chains,
-    feeToken = defaultConfig.feeToken,
+    feeToken,
     mode = defaultConfig.mode,
     messenger = defaultConfig.messenger,
     methodPolicies = defaultConfig.methodPolicies,
@@ -179,10 +179,11 @@ export function create(
     methodPolicies,
     mode,
     ready() {
-      const { chainId } = porto._internal.store.getState()
+      const { chainId, feeToken } = porto._internal.store.getState()
       if (!('ready' in messenger)) return
       return (messenger as Messenger.Bridge).ready({
         chainId,
+        feeToken,
         methodPolicies,
       })
     },
