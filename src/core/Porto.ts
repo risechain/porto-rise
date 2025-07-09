@@ -83,6 +83,22 @@ export function create(
           requestQueue: [],
         }),
         {
+          merge(p, currentState) {
+            const persistedState = p as State
+
+            // Ensure that the persisted chain id is still exists in the current
+            // configuration.
+            const persistedChain = config.chains.find(
+              (chain) => chain.id === persistedState.chainId,
+            )
+            const chainId = persistedChain?.id ?? currentState.chainId
+
+            return {
+              ...currentState,
+              ...persistedState,
+              chainId,
+            }
+          },
           name: config.storageKey,
           partialize(state) {
             return {
