@@ -232,7 +232,18 @@ describe('wallet_getPermissions', () => {
         method: 'wallet_getPermissions',
       })
       expect(
-        permissions.map((x) => ({ ...x, address: null, chainId: null })),
+        permissions.map((x) => ({
+          ...x,
+          address: null,
+          chainId: null,
+          permissions: {
+            ...x.permissions,
+            spend: x.permissions.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
+        })),
       ).matchSnapshot()
     }
 
@@ -255,7 +266,18 @@ describe('wallet_getPermissions', () => {
         method: 'wallet_getPermissions',
       })
       expect(
-        permissions.map((x) => ({ ...x, address: null, chainId: null })),
+        permissions.map((x) => ({
+          ...x,
+          address: null,
+          chainId: null,
+          permissions: {
+            ...x.permissions,
+            spend: x.permissions.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
+        })),
       ).matchSnapshot()
     }
   })

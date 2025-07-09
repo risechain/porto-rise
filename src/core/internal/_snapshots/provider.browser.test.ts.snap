@@ -39,7 +39,7 @@ exports[`wallet_getPermissions > behavior: grant on connect; grant another; get 
         {
           "limit": "0xde0b6b3a7640000",
           "period": "year",
-          "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+          "token": null,
         },
       ],
     },
@@ -86,7 +86,7 @@ exports[`wallet_getPermissions > behavior: grant on connect; grant another; get 
         {
           "limit": "0xde0b6b3a7640000",
           "period": "year",
-          "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+          "token": null,
         },
       ],
     },
