@@ -9,7 +9,6 @@ import * as Chains from './Chains.js'
 import type * as internal from './internal/porto.js'
 import * as Provider from './internal/provider.js'
 import type * as FeeToken from './internal/schema/feeToken.js'
-import type * as Permissions from './internal/schema/permissions.js'
 import type { ExactPartial, OneOf } from './internal/types.js'
 import * as Utils from './internal/utils.js'
 import * as Mode from './Mode.js'
@@ -21,10 +20,6 @@ export const defaultConfig = {
   announceProvider: true,
   chains: [Chains.baseSepolia],
   mode: browser ? Mode.dialog() : Mode.rpcServer(),
-  permissionsFeeLimit: {
-    currency: 'USD',
-    value: '1',
-  },
   storage: browser ? Storage.idb() : Storage.memory(),
   storageKey: 'porto.store',
   transports: {
@@ -66,8 +61,6 @@ export function create(
     feeToken: parameters.feeToken,
     merchantRpcUrl: parameters.merchantRpcUrl,
     mode: parameters.mode ?? defaultConfig.mode,
-    permissionsFeeLimit:
-      parameters.permissionsFeeLimit ?? defaultConfig.permissionsFeeLimit,
     storage: parameters.storage ?? defaultConfig.storage,
     storageKey: parameters.storageKey ?? defaultConfig.storageKey,
     transports,
@@ -190,11 +183,6 @@ export type Config<
    * URL to use for merchant functionality.
    */
   merchantRpcUrl?: string | undefined
-  /**
-   * Default fee limit to use for permissions.
-   * @default { currency: 'USD', value: '1' }
-   */
-  permissionsFeeLimit?: Permissions.FeeLimit | undefined
   /**
    * Storage to use.
    * @default Storage.idb()

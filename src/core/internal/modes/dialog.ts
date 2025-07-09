@@ -149,7 +149,6 @@ export function dialog(parameters: dialog.Parameters = {}) {
             const key = await PermissionsRequest.toKey(
               capabilities?.grantPermissions,
               {
-                defaultFeeLimit: config.permissionsFeeLimit,
                 feeTokens,
               },
             )
@@ -356,7 +355,7 @@ export function dialog(parameters: dialog.Parameters = {}) {
       async grantPermissions(parameters) {
         const { account, internal } = parameters
         const {
-          config: { permissionsFeeLimit, storage },
+          config: { storage },
           request,
           store,
         } = internal
@@ -370,7 +369,6 @@ export function dialog(parameters: dialog.Parameters = {}) {
 
         // Parse permissions request into a structured key.
         const key = await PermissionsRequest.toKey(permissions, {
-          defaultFeeLimit: permissionsFeeLimit,
           feeTokens,
         })
         if (!key) throw new Error('no key found.')
@@ -424,7 +422,6 @@ export function dialog(parameters: dialog.Parameters = {}) {
           const key = await PermissionsRequest.toKey(
             capabilities?.grantPermissions,
             {
-              defaultFeeLimit: config.permissionsFeeLimit,
               feeTokens,
             },
           )
@@ -559,7 +556,7 @@ export function dialog(parameters: dialog.Parameters = {}) {
 
       async prepareUpgradeAccount(parameters) {
         const { internal } = parameters
-        const { config, store, request } = internal
+        const { store, request } = internal
 
         if (request.method !== 'wallet_prepareUpgradeAccount')
           throw new Error(
@@ -573,7 +570,6 @@ export function dialog(parameters: dialog.Parameters = {}) {
         const key = await PermissionsRequest.toKey(
           capabilities?.grantPermissions,
           {
-            defaultFeeLimit: config.permissionsFeeLimit,
             feeTokens,
           },
         )

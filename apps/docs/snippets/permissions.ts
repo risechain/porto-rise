@@ -4,6 +4,7 @@ import { expConfig } from './abi'
 export const permissions = () =>
   ({
     expiry: Math.floor(Date.now() / 1_000) + 60 * 60, // 1 hour
+    feeLimit: 'include',
     permissions: {
       calls: [{ to: expConfig.address }],
       spend: [

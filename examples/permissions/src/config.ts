@@ -17,6 +17,7 @@ export const config = createConfig({
 export const permissions = () =>
   ({
     expiry: Math.floor(Date.now() / 1_000) + 60 * 60, // 1 hour
+    feeLimit: 'include',
     permissions: {
       calls: [{ to: exp1Config.address }],
       spend: [

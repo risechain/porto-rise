@@ -62,10 +62,9 @@ type Request = {
      * Porto will assign a spend permission on the user's
      * selected fee token that is equal to the limit provided.
      * 
-     * - Defaults to `porto.config.permissionsFeeLimit` (1 USD).
-     * - Provide `"include"` to have the fee inclusive with `permissions.spend`.
+     * Provide `"include"` to have the fee inclusive with `permissions.spend`.
      */
-    feeLimit?: {
+    feeLimit: {
       /** Currency of the limit. */
       currency: 'ETH' | 'USD' | 'USDC' | 'USDT'
       /** Value of the limit in the currency's unit (e.g. '1' = 1 USDC). */
@@ -94,12 +93,12 @@ type Request = {
       }[],
 
       /** Fee limit permission. */
-      feeLimit?: {
+      feeLimit: {
         /** Currency of the fee limit. */
         currency: 'ETH' | 'USDC' | 'USDT'
         /** Value of the fee limit. */
         value: string
-      } | null,
+      } | 'include',
 
       /** Spend permissions. */
       spend: {

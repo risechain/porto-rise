@@ -47,6 +47,10 @@ const response = await Actions.upgradeAccount(config, {
   connector: porto(),
   grantPermissions: { // [!code focus]
     expiry: Math.floor(Date.now() / 1_000) + 60 * 60, // 1 hour // [!code focus]
+    feeLimit: { // [!code focus]
+      currency: 'USD', // [!code focus]
+      value: '1', // [!code focus] 
+    }, // [!code focus]
     permissions: { // [!code focus]
       calls: [{ // [!code focus]
         signature: 'transfer(address,uint256)', // [!code focus]
@@ -96,10 +100,9 @@ type GrantPermissions = {
    * Porto will assign a spend permission on the user's
    * selected fee token that is equal to the limit provided.
    * 
-   * - Defaults to `porto.config.permissionsFeeLimit` (1 USD).
-   * - Provide `"include"` to have the fee inclusive with `permissions.spend`.
+   * Provide `"include"` to have the fee inclusive with `permissions.spend`.
    */
-  feeLimit?: {
+  feeLimit: {
     /** Currency of the limit. */
     currency: 'ETH' | 'USD' | 'USDC' | 'USDT'
     /** Value of the limit in the currency's unit (e.g. '1' = 1 USDC). */

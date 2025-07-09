@@ -11,7 +11,6 @@ export const connector = porto({
     host: PortoConfig.getDialogHost(),
     renderer: Dialog.iframe(),
   }),
-  permissionsFeeLimit: 'include',
 })
 
 export const config = createConfig({

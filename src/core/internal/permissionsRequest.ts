@@ -36,12 +36,11 @@ export async function toKey(
 ): Promise<Key.Key | undefined> {
   if (!request) return undefined
 
-  const { defaultFeeLimit, feeTokens = [] } = options
+  const { feeTokens = [] } = options
 
   const expiry = request.expiry ?? 0
   const type = request.key?.type ?? 'secp256k1'
   const permissions = resolvePermissions(request, {
-    defaultFeeLimit,
     feeTokens,
   })
   const publicKey = request?.key?.publicKey ?? '0x'
@@ -63,7 +62,6 @@ export async function toKey(
 
 export declare namespace toKey {
   export type Options = {
-    defaultFeeLimit?: Permissions.FeeLimit | undefined
     feeTokens?: FeeTokens.FeeTokens | undefined
   }
 }
@@ -81,13 +79,12 @@ export function resolvePermissions(
   options: resolvePermissions.Options,
 ) {
   const { permissions } = request
-  const { defaultFeeLimit, feeTokens } = options
+  const { feeTokens } = options
 
   const spend = permissions.spend ? [...permissions.spend] : []
 
   if (feeTokens && feeTokens.length > 0) {
     const feeLimit = getFeeLimit(request, {
-      defaultFeeLimit,
       feeTokens,
     })
 
@@ -136,7 +133,6 @@ export function resolvePermissions(
 
 export declare namespace resolvePermissions {
   export type Options = {
-    defaultFeeLimit?: Permissions.FeeLimit | undefined
     feeTokens?: FeeTokens.FeeTokens | undefined
   }
 }
@@ -153,13 +149,11 @@ export function getFeeLimit(
   request: Permissions.Request,
   options: getFeeLimit.Options,
 ): getFeeLimit.ReturnType {
-  const { defaultFeeLimit, feeTokens } = options
+  const { feeTokens } = options
 
   const feeLimit = (() => {
     if (request.feeLimit === 'include') return undefined
-    if (request.feeLimit) return request.feeLimit
-    if (defaultFeeLimit === 'include') return undefined
-    return defaultFeeLimit
+    return request.feeLimit
   })()
   const feeToken = feeTokens[0]!
 
@@ -196,7 +190,6 @@ export function getFeeLimit(
 
 export declare namespace getFeeLimit {
   export type Options = {
-    defaultFeeLimit?: Permissions.FeeLimit | undefined
     feeTokens: FeeTokens.FeeTokens
   }
 

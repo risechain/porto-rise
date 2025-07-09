@@ -306,6 +306,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             permissions: {
               calls: [{ signature: 'mint()' }],
             },
@@ -346,6 +350,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             key: {
               publicKey:
                 '0x86a0d77beccf47a0a78cccfc19fdfe7317816740c9f9e6d7f696a02b0c66e0e21744d93c5699e9ce658a64ce60df2f32a17954cd577c713922bf62a1153cf68e',
@@ -372,6 +380,10 @@ describe.each([
           params: [
             {
               expiry: 9999999999,
+              feeLimit: {
+                currency: 'USD',
+                value: '1',
+              },
               key: {
                 publicKey: '0x0000000000000000000000000000000000000000',
                 type: 'address',
@@ -427,6 +439,10 @@ describe.each([
           params: [
             {
               expiry: 9999999999,
+              feeLimit: {
+                currency: 'USD',
+                value: '1',
+              },
               key: {
                 publicKey:
                   '0x86a0d77beccf47a0a78cccfc19fdfe7317816740c9f9e6d7f696a02b0c66e0e21744d93c5699e9ce658a64ce60df2f32a17954cd577c713922bf62a1153cf68e',
@@ -453,6 +469,10 @@ describe.each([
           params: [
             {
               expiry: 0,
+              feeLimit: {
+                currency: 'USD',
+                value: '1',
+              },
               key: {
                 publicKey:
                   '0x86a0d77beccf47a0a78cccfc19fdfe7317816740c9f9e6d7f696a02b0c66e0e21744d93c5699e9ce658a64ce60df2f32a17954cd577c713922bf62a1153cf68e',
@@ -480,6 +500,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             permissions: {
               calls: [{ signature: 'mint()' }],
             },
@@ -491,6 +515,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             permissions: {
               calls: [{ signature: 'mint()' }],
               spend: [
@@ -519,6 +547,10 @@ describe.each([
               createAccount: true,
               grantPermissions: {
                 expiry: 9999999999,
+                feeLimit: {
+                  currency: 'USD',
+                  value: '1',
+                },
                 key: {
                   publicKey: '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef',
                   type: 'secp256k1',
@@ -536,6 +568,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             key: {
               publicKey:
                 '0xcafebabecafebabecafebabecafebabecafebabecafebabecafebabecafebabe',
@@ -744,6 +780,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             permissions: {
               calls: [{ signature: 'mint()' }],
             },
@@ -1149,6 +1189,10 @@ describe.each([
               createAccount: true,
               grantPermissions: {
                 expiry: 9999999999,
+                feeLimit: {
+                  currency: 'USD',
+                  value: '1',
+                },
                 permissions: {
                   calls: [{ signature: 'mint()' }],
                 },
@@ -1193,6 +1237,10 @@ describe.each([
               createAccount: true,
               grantPermissions: {
                 expiry: 9999999999,
+                feeLimit: {
+                  currency: 'USD',
+                  value: '1',
+                },
                 key: {
                   publicKey,
                   type: 'p256',
@@ -1232,6 +1280,10 @@ describe.each([
                 createAccount: true,
                 grantPermissions: {
                   expiry: 0,
+                  feeLimit: {
+                    currency: 'USD',
+                    value: '1',
+                  },
                   permissions: {
                     calls: [{ signature: 'mint()' }],
                   },
@@ -1254,6 +1306,10 @@ describe.each([
                 createAccount: true,
                 grantPermissions: {
                   expiry: 9999999,
+                  feeLimit: {
+                    currency: 'USD',
+                    value: '1',
+                  },
                   permissions: {
                     calls: [],
                   },
@@ -1748,6 +1804,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             permissions: {
               calls: [{ to: exp1Address }],
               spend: [
@@ -1824,6 +1884,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             permissions: {
               calls: [{ to: exp1Address }],
               spend: [
@@ -1909,6 +1973,10 @@ describe.each([
           params: [
             {
               expiry: 9999999999,
+              feeLimit: {
+                currency: 'USD',
+                value: '1',
+              },
               permissions: {
                 calls: [{ to: '0x0000000000000000000000000000000000000000' }],
                 spend: [
@@ -1982,6 +2050,10 @@ describe.each([
           params: [
             {
               expiry: 9999999999,
+              feeLimit: {
+                currency: 'USD',
+                value: '1',
+              },
               permissions: {
                 calls: [{ to: exp1Address }],
                 spend: [
@@ -2078,6 +2150,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             permissions: {
               calls: [{ to: exp1Address }],
               spend: [
@@ -2185,6 +2261,10 @@ describe.each([
         params: [
           {
             expiry: 9999999999,
+            feeLimit: {
+              currency: 'USD',
+              value: '1',
+            },
             key: {
               publicKey:
                 '0x86a0d77beccf47a0a78cccfc19fdfe7317816740c9f9e6d7f696a02b0c66e0e21744d93c5699e9ce658a64ce60df2f32a17954cd577c713922bf62a1153cf68e',
@@ -2380,6 +2460,10 @@ describe.each([
                 createAccount: true,
                 grantPermissions: {
                   expiry: 9999999999,
+                  feeLimit: {
+                    currency: 'USD',
+                    value: '1',
+                  },
                   key: {
                     publicKey: publicKey,
                     type: 'p256',
@@ -2476,6 +2560,10 @@ describe.each([
                 createAccount: true,
                 grantPermissions: {
                   expiry: 9999999999,
+                  feeLimit: {
+                    currency: 'USD',
+                    value: '1',
+                  },
                   key: {
                     publicKey: publicKey,
                     type: 'p256',
@@ -2576,6 +2664,10 @@ describe.each([
                 createAccount: true,
                 grantPermissions: {
                   expiry: 9999999999,
+                  feeLimit: {
+                    currency: 'USD',
+                    value: '1',
+                  },
                   key: {
                     publicKey: address,
                     type: 'address',

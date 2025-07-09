@@ -99,6 +99,10 @@ describe('grantPermissions', () => {
 
     const response = await WalletActions.grantPermissions(client, {
       expiry: 99999999999,
+      feeLimit: {
+        currency: 'USD',
+        value: '1',
+      },
       key: {
         publicKey: '0x0000000000000000000000000000000000000000',
         type: 'address',
@@ -202,6 +206,10 @@ describe('getPermissions', () => {
 
     await WalletActions.grantPermissions(client, {
       expiry: 99999999999,
+      feeLimit: {
+        currency: 'USD',
+        value: '1',
+      },
       key: {
         publicKey: '0x0000000000000000000000000000000000000000',
         type: 'address',
@@ -298,6 +306,10 @@ describe('revokePermissions', () => {
 
     const { id } = await WalletActions.grantPermissions(client, {
       expiry: 99999999999,
+      feeLimit: {
+        currency: 'USD',
+        value: '1',
+      },
       permissions: {
         calls: [
           {
@@ -347,6 +359,10 @@ describe('prepareCalls + sendPreparedCalls', () => {
       createAccount: true,
       grantPermissions: {
         expiry: 9999999999,
+        feeLimit: {
+          currency: 'USD',
+          value: '1',
+        },
         key: sessionKey,
         permissions: {
           calls: [{ to: exp1Address }],
