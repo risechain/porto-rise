@@ -123,6 +123,13 @@ describe('grantPermissions', () => {
       address: null,
       capabilities: null,
       chainId: null,
+      permissions: {
+        ...response.permissions,
+        spend: response.permissions?.spend?.map((x) => ({
+          ...x,
+          token: null,
+        })),
+      },
     }).toMatchInlineSnapshot(`
       {
         "address": null,
@@ -144,7 +151,7 @@ describe('grantPermissions', () => {
             {
               "limit": 1000000000000000000n,
               "period": "year",
-              "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+              "token": null,
             },
           ],
         },
@@ -229,6 +236,13 @@ describe('getPermissions', () => {
         ...response,
         address: null,
         chainId: null,
+        permissions: {
+          ...response!.permissions,
+          spend: response!.permissions?.spend?.map((x) => ({
+            ...x,
+            token: null,
+          })),
+        },
       }).toMatchInlineSnapshot(`
         {
           "address": null,
@@ -249,7 +263,7 @@ describe('getPermissions', () => {
               {
                 "limit": 1000000000000000000n,
                 "period": "year",
-                "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+                "token": null,
               },
             ],
           },

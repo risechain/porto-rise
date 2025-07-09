@@ -326,6 +326,13 @@ describe.each([
           expiry: null,
           hash: null,
           id: null,
+          permissions: {
+            ...x.permissions,
+            spend: x.permissions?.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
           publicKey: null,
         })),
       ).matchSnapshot()
@@ -372,6 +379,13 @@ describe.each([
         address: null,
         capabilities: null,
         chainId: null,
+        permissions: {
+          ...permissions.permissions,
+          spend: permissions.permissions?.spend?.map((x) => ({
+            ...x,
+            token: null,
+          })),
+        },
       }).matchSnapshot()
 
       {
@@ -407,6 +421,13 @@ describe.each([
           address: null,
           capabilities: null,
           chainId: null,
+          permissions: {
+            ...permissions.permissions,
+            spend: permissions.permissions?.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
         }).matchSnapshot()
       }
 
@@ -799,6 +820,13 @@ describe.each([
           expiry: null,
           hash: null,
           id: null,
+          permissions: {
+            ...x.permissions,
+            spend: x.permissions?.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
           publicKey: null,
         })),
       ).matchSnapshot()
@@ -1210,6 +1238,13 @@ describe.each([
           expiry: null,
           hash: null,
           id: null,
+          permissions: {
+            ...x.permissions,
+            spend: x.permissions?.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
           publicKey: null,
         })),
       ).matchSnapshot()
@@ -1262,6 +1297,13 @@ describe.each([
           expiry: i === 0 ? null : x.expiry,
           hash: i === 0 ? null : x.hash,
           id: i === 0 ? null : x.id,
+          permissions: {
+            ...x.permissions,
+            spend: x.permissions?.spend?.map((x) => ({
+              ...x,
+              token: null,
+            })),
+          },
           publicKey: i === 0 ? null : x.publicKey,
         })),
       ).matchSnapshot()

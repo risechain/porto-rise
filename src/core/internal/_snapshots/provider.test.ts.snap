@@ -8,7 +8,9 @@ exports[`contract > wallet_connect > behavior: \`createAccount\` + \`grantPermis
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": undefined,
@@ -43,7 +45,9 @@ exports[`contract > wallet_connect > behavior: \`createAccount\` + \`grantPermis
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": undefined,
@@ -406,6 +410,7 @@ exports[`contract > wallet_grantPermissions > behavior: provided key 2`] = `
       {
         "limit": "0x14d1120d7b160000",
         "period": "day",
+        "token": null,
       },
     ],
   },
@@ -491,7 +496,9 @@ exports[`contract > wallet_grantPermissions > default 1`] = `
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": undefined,
@@ -574,7 +581,9 @@ exports[`contract > wallet_revokePermissions > default 1`] = `
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": undefined,
@@ -652,7 +661,9 @@ exports[`rpcServer > wallet_connect > behavior: \`createAccount\` + \`grantPermi
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": [Function],
@@ -675,7 +686,7 @@ exports[`rpcServer > wallet_connect > behavior: \`createAccount\` + \`grantPermi
         {
           "limit": 1000000000000000000n,
           "period": "year",
-          "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+          "token": null,
         },
       ],
     },
@@ -693,7 +704,9 @@ exports[`rpcServer > wallet_connect > behavior: \`createAccount\` + \`grantPermi
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": [Function],
@@ -716,7 +729,7 @@ exports[`rpcServer > wallet_connect > behavior: \`createAccount\` + \`grantPermi
         {
           "limit": 1000000000000000000n,
           "period": "year",
-          "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+          "token": null,
         },
       ],
     },
@@ -1145,7 +1158,7 @@ exports[`rpcServer > wallet_grantPermissions > behavior: provided key 1`] = `
       {
         "limit": "0xde0b6b3a7640000",
         "period": "year",
-        "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+        "token": null,
       },
     ],
   },
@@ -1173,11 +1186,12 @@ exports[`rpcServer > wallet_grantPermissions > behavior: provided key 2`] = `
       {
         "limit": "0x14d1120d7b160000",
         "period": "day",
+        "token": null,
       },
       {
         "limit": "0xde0b6b3a7640000",
         "period": "day",
-        "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+        "token": null,
       },
     ],
   },
@@ -1274,7 +1288,9 @@ exports[`rpcServer > wallet_grantPermissions > default 1`] = `
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": [Function],
@@ -1297,7 +1313,7 @@ exports[`rpcServer > wallet_grantPermissions > default 1`] = `
         {
           "limit": 1000000000000000000n,
           "period": "year",
-          "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+          "token": null,
         },
       ],
     },
@@ -1363,7 +1379,9 @@ exports[`rpcServer > wallet_revokePermissions > default 1`] = `
     "expiry": null,
     "hash": null,
     "id": null,
-    "permissions": undefined,
+    "permissions": {
+      "spend": undefined,
+    },
     "prehash": false,
     "privateKey": {
       "privateKey": [Function],
@@ -1386,7 +1404,7 @@ exports[`rpcServer > wallet_revokePermissions > default 1`] = `
         {
           "limit": 1000000000000000000n,
           "period": "year",
-          "token": "0x8ce361602b935680e8dec218b820ff5056beb7af",
+          "token": null,
         },
       ],
     },
