@@ -150,6 +150,41 @@ export function create(
   }
 }
 
+/**
+ * Instantiates an Porto instance with future defaults (mainnet configuration).
+ *
+ * WARNING: This is not recommended for production use yet, and will become
+ * stable in a future release.
+ *
+ * @example
+ * ```ts twoslash
+ * import { Porto } from 'porto'
+ *
+ * const porto = Porto.unstable_create()
+ *
+ * const blockNumber = await porto.provider.request({ method: 'eth_blockNumber' })
+ * ```
+ */
+export function unstable_create<
+  const chains extends readonly [Chains.Chain, ...Chains.Chain[]],
+>(parameters?: ExactPartial<Config<chains>> | undefined): Porto<chains>
+export function unstable_create(
+  parameters: ExactPartial<Config> | undefined = {},
+): Porto {
+  return create({
+    chains: [Chains.base],
+    mode: browser
+      ? Mode.dialog({
+          host: 'https://id.porto.sh/dialog',
+        })
+      : Mode.rpcServer(),
+    transports: {
+      [Chains.base.id]: http(),
+    },
+    ...parameters,
+  })
+}
+
 export type Config<
   chains extends readonly [Chains.Chain, ...Chains.Chain[]] = readonly [
     Chains.Chain,
