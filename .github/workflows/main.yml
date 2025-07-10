@@ -75,11 +75,21 @@ jobs:
             const artifactUrl = '${{ steps.artifact-upload-step.outputs.artifact-url }}';
             
             // Create extension section for release notes
-            const extensionSection = '\n\n## Extension\n\n' +
-              'Extension builds are available for this release:\n\n' +
-              `[extension.zip](${artifactUrl})` +
-              '---\n\n' +
-              '*Extension built from commit ' + context.sha.substring(0, 7) + '*';
+            const extensionSection = [
+              '\n\n### Extension',
+              '\n',
+              `[Download](${artifactUrl})`,
+              '\n',
+              '#### Setup Instructions',
+              '\n',
+              '1. Download the `extension.zip` asset from the link below',
+              '2. Unzip the downloaded file',
+              '3. Open your browser and navigate to extensions',
+              '4. Enable `Developer Mode` in the top right corner',
+              '5. Click `Load Unpacked` in the top left corner',
+              '6. Select the unzipped folder',
+              '7. Done!'
+            ].join('\n');
 
             // Update release body (append to existing content)
             const body = (latestRelease.body || '') + extensionSection;
