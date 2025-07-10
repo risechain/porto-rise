@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: extension
-          path: ./apps/extension/.output/
+          path: ./apps/extension/.output/*.zip
 
   changesets:
     name: Changesets
