@@ -2,7 +2,9 @@
 "porto": patch
 ---
 
-**Breaking:** Added required `feeLimit` property on `wallet_grantPermissions`. This is a spend permission that will be used to pay for fees used by permissions in the user's selected fee token (e.g. USDC).
+**Breaking:** Removed implicit fee limits (defaulting to 1 USD of the fee token) when granting permissions. 
+
+A new `feeLimit` property has been added on `wallet_grantPermissions` to assign fee limits. This converts to a spend permission that will be used to pay for fees (for permissioned calls) in the user's selected fee token (e.g. USDC).
 
 ```ts
 provider.request({

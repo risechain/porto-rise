@@ -809,7 +809,6 @@ describe('Request', () => {
     expect(() =>
       Schema.decodeUnknownSync(Permissions.Request)({
         expiry: 1000,
-        feeLimit: 'include',
         // Missing permissions
       }),
     ).toThrowErrorMatchingInlineSnapshot(`
@@ -826,7 +825,6 @@ describe('Request', () => {
     expect(() =>
       Schema.decodeUnknownSync(Permissions.Request)({
         expiry: 1000,
-        feeLimit: 'include',
         permissions: {
           calls: [
             {

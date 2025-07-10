@@ -3,16 +3,13 @@ import * as FeeToken from './feeToken.js'
 import * as Key from './key.js'
 import * as Primitive from './primitive.js'
 
-export const FeeLimit = Schema.Union(
-  Schema.Struct({
-    currency: Schema.Union(FeeToken.Kind, Schema.Literal('USD')),
-    value: Schema.Union(
-      Schema.TemplateLiteral(Schema.Number, '.', Schema.Number),
-      Schema.TemplateLiteral(Schema.Number),
-    ).pipe(Schema.pattern(/^\d+(\.\d+)?$/)),
-  }),
-  Schema.TemplateLiteral('include'),
-)
+export const FeeLimit = Schema.Struct({
+  currency: Schema.Union(FeeToken.Kind, Schema.Literal('USD')),
+  value: Schema.Union(
+    Schema.TemplateLiteral(Schema.Number, '.', Schema.Number),
+    Schema.TemplateLiteral(Schema.Number),
+  ).pipe(Schema.pattern(/^\d+(\.\d+)?$/)),
+})
 export type FeeLimit = typeof FeeLimit.Type
 
 export const Permissions = Schema.Struct({
@@ -33,7 +30,7 @@ export const Request = Schema.Struct({
   address: Schema.optional(Primitive.Address),
   chainId: Schema.optional(Primitive.Number),
   expiry: Schema.Number.pipe(Schema.greaterThanOrEqualTo(1)),
-  feeLimit: FeeLimit,
+  feeLimit: Schema.optional(FeeLimit),
   key: Schema.optional(Key.Base.pick('publicKey', 'type')),
   permissions: Schema.Struct({
     calls: Key.CallPermissions,

@@ -150,7 +150,6 @@ describe('wallet_getPermissions', () => {
               createAccount: true,
               grantPermissions: {
                 expiry: 9999999999,
-                feeLimit: 'include',
                 permissions: {
                   calls: [{ signature: 'mint()' }],
                 },
@@ -168,7 +167,6 @@ describe('wallet_getPermissions', () => {
         params: [
           {
             expiry: 9999999999,
-            feeLimit: 'include',
             permissions: { calls: [{ signature: 'mint()' }] },
           },
         ],
@@ -194,7 +192,6 @@ describe('wallet_getPermissions', () => {
               createAccount: true,
               grantPermissions: {
                 expiry: 9999999999,
-                feeLimit: 'include',
                 key: {
                   publicKey: '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef',
                   type: 'secp256k1',

@@ -14,7 +14,6 @@ export function fromKey(key: Key.Key): PermissionsRequest {
   const { expiry, permissions, publicKey, type } = key
   return {
     expiry,
-    feeLimit: 'include',
     key: {
       publicKey,
       type,
@@ -149,15 +148,12 @@ export function getFeeLimit(
   request: Permissions.Request,
   options: getFeeLimit.Options,
 ): getFeeLimit.ReturnType {
+  const { feeLimit } = request
   const { feeTokens } = options
 
-  const feeLimit = (() => {
-    if (request.feeLimit === 'include') return undefined
-    return request.feeLimit
-  })()
-  const feeToken = feeTokens[0]!
-
   if (!feeLimit) return undefined
+
+  const feeToken = feeTokens[0]!
 
   const limitToken = feeTokens.find((token) => {
     if (feeLimit.currency === 'USD') return token.kind.startsWith('USD')
