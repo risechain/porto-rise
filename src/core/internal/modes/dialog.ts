@@ -3,7 +3,6 @@ import * as Provider from 'ox/Provider'
 import * as RpcRequest from 'ox/RpcRequest'
 import * as RpcSchema from 'ox/RpcSchema'
 import { waitForCallsStatus } from 'viem/actions'
-import * as MethodPolicies from '../../../remote/internal/methodPolicies.js'
 import * as Account from '../../../viem/Account.js'
 import * as Key from '../../../viem/Key.js'
 import * as ServerClient from '../../../viem/ServerClient.js'
@@ -267,8 +266,8 @@ export function dialog(parameters: dialog.Parameters = {}) {
         if (request.method !== 'wallet_getAccountVersion')
           throw new Error('Cannot get version for method: ' + request.method)
 
-        const supported = supportsHeadless(renderer, 'wallet_getAccountVersion')
-        if (!supported) return fallback.actions.getAccountVersion(parameters)
+        if (!renderer.supportsHeadless)
+          return fallback.actions.getAccountVersion(parameters)
 
         const provider = getProvider(store)
         const result = await provider.request(request)
@@ -282,8 +281,8 @@ export function dialog(parameters: dialog.Parameters = {}) {
         if (request.method !== 'wallet_getCallsStatus')
           throw new Error('Cannot get status for method: ' + request.method)
 
-        const supported = supportsHeadless(renderer, 'wallet_getCallsStatus')
-        if (!supported) return fallback.actions.getCallsStatus(parameters)
+        if (!renderer.supportsHeadless)
+          return fallback.actions.getCallsStatus(parameters)
 
         const provider = getProvider(store)
         const result = await provider.request(request)
@@ -299,8 +298,8 @@ export function dialog(parameters: dialog.Parameters = {}) {
             'Cannot get capabilities for method: ' + request.method,
           )
 
-        const supported = supportsHeadless(renderer, 'wallet_getCapabilities')
-        if (!supported) return fallback.actions.getCapabilities(parameters)
+        if (!renderer.supportsHeadless)
+          return fallback.actions.getCapabilities(parameters)
 
         const provider = getProvider(store)
         const result = await provider.request(request)
@@ -311,10 +310,9 @@ export function dialog(parameters: dialog.Parameters = {}) {
         const { account, internal } = parameters
         const { store } = internal
 
-        const supported = supportsHeadless(renderer, 'wallet_getKeys')
-
         const keys = await (async () => {
-          if (!supported) return fallback.actions.getKeys(parameters)
+          if (!renderer.supportsHeadless)
+            return fallback.actions.getKeys(parameters)
 
           const provider = getProvider(store)
           const result = await provider.request({
@@ -541,8 +539,8 @@ export function dialog(parameters: dialog.Parameters = {}) {
         if (request.method !== 'wallet_prepareCalls')
           throw new Error('Cannot prepare calls for method: ' + request.method)
 
-        const supported = supportsHeadless(renderer, 'wallet_prepareCalls')
-        if (!supported) return fallback.actions.prepareCalls(parameters)
+        if (!renderer.supportsHeadless)
+          return fallback.actions.prepareCalls(parameters)
 
         const feeToken = await resolveFeeToken(internal, parameters)
 
@@ -585,11 +583,7 @@ export function dialog(parameters: dialog.Parameters = {}) {
             'Cannot prepare upgrade for method: ' + request.method,
           )
 
-        const supported = supportsHeadless(
-          renderer,
-          'wallet_prepareUpgradeAccount',
-        )
-        if (!supported)
+        if (!renderer.supportsHeadless)
           return fallback.actions.prepareUpgradeAccount(parameters)
 
         // Extract the capabilities from the request.
@@ -724,8 +718,8 @@ export function dialog(parameters: dialog.Parameters = {}) {
         // without sending a request to the dialog. If the key does not
         // have permission to execute the calls, fall back to the dialog.
         if (key && key.role === 'session') {
-          const supported = supportsHeadless(renderer, 'wallet_prepareCalls')
-          if (!supported) return fallback.actions.sendCalls(parameters)
+          if (!renderer.supportsHeadless)
+            return fallback.actions.sendCalls(parameters)
 
           try {
             // TODO: use eventual Viem Action.
@@ -855,8 +849,8 @@ export function dialog(parameters: dialog.Parameters = {}) {
             'Cannot send prepared calls for method: ' + request.method,
           )
 
-        const supported = supportsHeadless(renderer, 'wallet_sendPreparedCalls')
-        if (!supported) return fallback.actions.sendPreparedCalls(parameters)
+        if (!renderer.supportsHeadless)
+          return fallback.actions.sendPreparedCalls(parameters)
 
         const provider = getProvider(store)
         const result = await provider.request(request)
@@ -1025,31 +1019,6 @@ export async function resolveFeeToken(
   } = internal
   const { feeToken: overrideFeeToken } = parameters ?? {}
   return overrideFeeToken ?? feeToken
-}
-
-/**
- * Checks if the method is supported in headless mode by the renderer.
- *
- * @param method - The method to check.
- * @returns Whether the method is supported in headless mode.
- */
-function supportsHeadless(renderer: Dialog.Dialog, method: string) {
-  const policy = MethodPolicies.methodPolicies.find(
-    (x) => x.method === method,
-  ) as MethodPolicies.MethodPolicy
-
-  if (renderer.name === 'popup') {
-    if (typeof policy?.modes?.headless === 'boolean')
-      return !policy?.modes?.headless
-  }
-
-  return true
-}
-
-declare namespace supportsHeadless {
-  type Options = {
-    renderer: Dialog.Dialog
-  }
 }
 
 function getAuthUrl(
