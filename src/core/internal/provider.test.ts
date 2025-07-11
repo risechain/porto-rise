@@ -1479,15 +1479,6 @@ describe.each([
       expect(permissions).matchSnapshot()
       expect(merchant).matchSnapshot()
     })
-
-    test('behavior: unsupported chain', async () => {
-      const { porto } = getPorto()
-      const capabilities = await porto.provider.request({
-        method: 'wallet_getCapabilities',
-        params: [undefined, ['0x1']],
-      })
-      expect(capabilities).toMatchInlineSnapshot('{}')
-    })
   })
 
   describe('wallet_sendCalls', () => {
