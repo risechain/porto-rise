@@ -3,7 +3,7 @@ import * as Provider from 'ox/Provider'
 import * as RpcRequest from 'ox/RpcRequest'
 import * as RpcSchema from 'ox/RpcSchema'
 import { waitForCallsStatus } from 'viem/actions'
-import * as Porto_remote from '../../../remote/Porto.js'
+import * as MethodPolicies from '../../../remote/internal/methodPolicies.js'
 import * as Account from '../../../viem/Account.js'
 import * as Key from '../../../viem/Key.js'
 import * as ServerClient from '../../../viem/ServerClient.js'
@@ -1034,9 +1034,9 @@ export async function resolveFeeToken(
  * @returns Whether the method is supported in headless mode.
  */
 function supportsHeadless(renderer: Dialog.Dialog, method: string) {
-  const policy = Porto_remote.defaultConfig.methodPolicies.find(
+  const policy = MethodPolicies.methodPolicies.find(
     (x) => x.method === method,
-  ) as Porto_remote.MethodPolicy
+  ) as MethodPolicies.MethodPolicy
 
   if (renderer.name === 'popup') {
     if (typeof policy?.modes?.headless === 'boolean')
