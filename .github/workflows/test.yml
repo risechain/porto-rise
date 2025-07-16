@@ -89,16 +89,16 @@ jobs:
         include:
           - local: 'true'
             browser: 'true'
-            enabled: ${{ inputs.test-local-browser != false }}
+            enabled: ${{ inputs.test-local-browser == true || inputs.test-local-browser == null }}
           - local: 'true'
             browser: 'false'
-            enabled: ${{ inputs.test-local-node != false }}
+            enabled: ${{ inputs.test-local-node == true || inputs.test-local-node == null }}
           - local: 'false'
             browser: 'true'
-            enabled: ${{ inputs.test-deployment-browser != false }}
+            enabled: ${{ inputs.test-deployment-browser == true || inputs.test-deployment-browser == null }}
           - local: 'false'
             browser: 'false'
-            enabled: ${{ inputs.test-deployment-node != false }}
+            enabled: ${{ inputs.test-deployment-node == true || inputs.test-deployment-node == null }}
     env: 
       CI: true
       VITE_LOCAL: ${{ matrix.local }}
