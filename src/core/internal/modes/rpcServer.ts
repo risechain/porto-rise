@@ -277,8 +277,6 @@ export function rpcServer(parameters: rpcServer.Parameters = {}) {
         })
         if (!authorizeKey) throw new Error('key to authorize not found.')
 
-        console.log(authorizeKey)
-
         const preCalls = await getAuthorizeKeyPreCalls(client, {
           account,
           authorizeKey,
