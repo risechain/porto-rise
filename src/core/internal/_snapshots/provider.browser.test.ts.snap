@@ -9,7 +9,7 @@ exports[`wallet_getPermissions > behavior: grant on connect; grant another; get 
     "id": "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
     "key": {
       "publicKey": "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
-      "type": "secp256k1",
+      "type": "address",
     },
     "permissions": {
       "calls": [
@@ -60,7 +60,7 @@ exports[`wallet_getPermissions > behavior: grant on connect; grant another; get 
     "id": "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
     "key": {
       "publicKey": "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
-      "type": "secp256k1",
+      "type": "address",
     },
     "permissions": {
       "calls": [
