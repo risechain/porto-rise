@@ -377,7 +377,7 @@ export function contract(parameters: contract.Parameters = {}) {
                 return Key.fromWebAuthnP256({
                   ...key,
                   credential: {
-                    id: loadedKey!.credentialId!,
+                    id: loadedKey?.credentialId!,
                     publicKey: PublicKey.fromHex(key.publicKey),
                   },
                   id: address,
