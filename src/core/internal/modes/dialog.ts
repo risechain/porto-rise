@@ -325,7 +325,7 @@ export function dialog(parameters: dialog.Parameters = {}) {
         })()
 
         return U.uniqBy(
-          [...(account.keys ?? []), ...keys],
+          [...keys, ...(account.keys ?? [])],
           (key) => key.publicKey,
         )
       },

@@ -14,10 +14,14 @@ exports[`wallet_getPermissions > behavior: grant on connect; grant another; get 
     "permissions": {
       "calls": [
         {
-          "signature": "mint()",
+          "signature": "0x1249c58b",
+        },
+        {
+          "signature": "0x32323232",
+          "to": "0x68b1d87f95878fe05b998f19b66f4baba5de1aed",
         },
       ],
-      "spend": [],
+      "spend": undefined,
     },
   },
   {
@@ -61,10 +65,14 @@ exports[`wallet_getPermissions > behavior: grant on connect; grant another; get 
     "permissions": {
       "calls": [
         {
-          "signature": "mint()",
+          "signature": "0x1249c58b",
+        },
+        {
+          "signature": "0x32323232",
+          "to": "0x68b1d87f95878fe05b998f19b66f4baba5de1aed",
         },
       ],
-      "spend": [],
+      "spend": undefined,
     },
   },
   {

@@ -232,7 +232,7 @@ export function rpcServer(parameters: rpcServer.Parameters = {}) {
         const keys = await ServerActions.getKeys(client, { account })
 
         return U.uniqBy(
-          [...(account.keys ?? []), ...keys],
+          [...keys, ...(account.keys ?? [])],
           (key) => key.publicKey,
         )
       },
@@ -276,6 +276,8 @@ export function rpcServer(parameters: rpcServer.Parameters = {}) {
           feeTokens,
         })
         if (!authorizeKey) throw new Error('key to authorize not found.')
+
+        console.log(authorizeKey)
 
         const preCalls = await getAuthorizeKeyPreCalls(client, {
           account,
