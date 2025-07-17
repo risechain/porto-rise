@@ -1,10 +1,9 @@
 import { Chains, Mode } from 'porto'
 import type { Porto } from 'porto/remote'
 import { http, type ValueOf } from 'viem'
-
+import { riseTestnet } from 'viem/chains'
 import * as Env from './Env'
 import * as Sentry from './Sentry'
-import { riseTestnet } from 'viem/chains'
 
 const mock = import.meta.env.MODE === 'test'
 
@@ -39,18 +38,6 @@ const config = {
       [Chains.base.id]: http(undefined, Sentry.httpTransportOptions()),
     },
   },
-  stg: {
-    chains: [Chains.baseSepolia],
-    feeToken: 'EXP',
-    mode: Mode.rpcServer({
-      mock,
-      persistPreCalls: false,
-    }),
-    storageKey: 'porto.store.stg',
-    transports: {
-      [Chains.baseSepolia.id]: http(undefined, Sentry.httpTransportOptions()),
-    },
-  },
   rise: {
     chains: [
       {
@@ -63,19 +50,29 @@ const config = {
         },
         rpcUrls: {
           default: {
-            http: [
-              'http://localhost:9119',
-            ]
-          }
-        }
-      }
+            http: ['http://localhost:9200'],
+          },
+        },
+      },
     ],
     mode: Mode.rpcServer({
       mock,
-      persistPreCalls: false
+      persistPreCalls: false,
     }),
     storageKey: 'porto.store.rise',
-  }
+  },
+  stg: {
+    chains: [Chains.baseSepolia],
+    feeToken: 'EXP',
+    mode: Mode.rpcServer({
+      mock,
+      persistPreCalls: false,
+    }),
+    storageKey: 'porto.store.stg',
+    transports: {
+      [Chains.baseSepolia.id]: http(undefined, Sentry.httpTransportOptions()),
+    },
+  },
 } as const satisfies Record<Env.Env, Partial<Porto.Config>>
 
 const dialogHosts = {
@@ -88,12 +85,12 @@ const dialogHosts = {
   prod: import.meta.env.PROD
     ? 'https://id.porto.sh/dialog/'
     : 'https://prod.localhost:5174/dialog/',
+  rise: import.meta.env.PROD
+    ? undefined
+    : 'https://rise.localhost:5174/dialog/',
   stg: import.meta.env.PROD
     ? 'https://stg.id.porto.sh/dialog/'
     : 'https://localhost:5174/dialog/',
-  rise: import.meta.env.PROD
-    ? undefined
-    : 'https://rise.localhost:5174/dialog/'
 } as const satisfies Record<Env.Env, string | undefined>
 
 export function getConfig(
