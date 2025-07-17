@@ -45,6 +45,7 @@ export default defineConfig(({ mode }) => {
               'stg.localhost',
               'dev.localhost',
               'anvil.localhost',
+              'rise.localhost'
             ],
           }),
       Tailwindcss(),

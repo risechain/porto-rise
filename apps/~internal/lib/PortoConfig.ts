@@ -4,6 +4,7 @@ import { http, type ValueOf } from 'viem'
 
 import * as Env from './Env'
 import * as Sentry from './Sentry'
+import { riseTestnet } from 'viem/chains'
 
 const mock = import.meta.env.MODE === 'test'
 
@@ -50,6 +51,31 @@ const config = {
       [Chains.baseSepolia.id]: http(undefined, Sentry.httpTransportOptions()),
     },
   },
+  rise: {
+    chains: [
+      {
+        ...riseTestnet,
+        contracts: {
+          ...riseTestnet.contracts,
+          portoAccount: {
+            address: '0xf6b3ddc789396f3cc8e71956c1e405d3398203ec',
+          },
+        },
+        rpcUrls: {
+          default: {
+            http: [
+              'http://localhost:9119',
+            ]
+          }
+        }
+      }
+    ],
+    mode: Mode.rpcServer({
+      mock,
+      persistPreCalls: false
+    }),
+    storageKey: 'porto.store.rise',
+  }
 } as const satisfies Record<Env.Env, Partial<Porto.Config>>
 
 const dialogHosts = {
@@ -65,6 +91,9 @@ const dialogHosts = {
   stg: import.meta.env.PROD
     ? 'https://stg.id.porto.sh/dialog/'
     : 'https://localhost:5174/dialog/',
+  rise: import.meta.env.PROD
+    ? undefined
+    : 'https://rise.localhost:5174/dialog/'
 } as const satisfies Record<Env.Env, string | undefined>
 
 export function getConfig(
