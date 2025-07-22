@@ -62,7 +62,7 @@ const config = {
     storageKey: 'porto.store.rise',
     transports: {
       [riseTestnet.id]: http(),
-    }
+    },
   },
   stg: {
     chains: [Chains.baseSepolia],
