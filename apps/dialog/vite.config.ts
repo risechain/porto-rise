@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
           ? mode === 'test'
             ? '"http://localhost:5173"'
             : '"https://anvil.localhost:5173"'
-          : process.env.VITE_WORKERS_URL,
+          : JSON.stringify(process.env.VITE_WORKERS_URL),
     },
     plugins: [
       skipMkcert
