@@ -7,7 +7,7 @@ corsApp.use('*', async (context, next) => {
   const corsMiddlewareHandler = cors({
     allowMethods: ['GET', 'POST', 'OPTIONS'],
     origin: (origin, _originContext) => {
-      if (context.env.ENVIRONMENT !== 'production') return origin
+      if (context.env.ENVIRONMENT === 'local') return origin
       return origin?.endsWith('.porto.sh') ? origin : ''
     },
   })

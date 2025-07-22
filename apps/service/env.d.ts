@@ -1,5 +1,5 @@
 interface EnvironmentVariables {
-  readonly ENVIRONMENT: 'development' | 'production'
+  readonly ENVIRONMENT: 'local' | 'production'
 
   /** Workers System Environment Variables */
   readonly WORKERS_CI_BRANCH: string

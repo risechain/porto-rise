@@ -1,10 +1,18 @@
 {
-  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "$schema": "node_modules/wrangler/config-schema.json",
   "account_id": "ba6ee3674b03f08481e57ff9992c601e",
   "compatibility_date": "2025-06-17",
   "compatibility_flags": ["nodejs_compat"],
   "dev": {
     "port": 6969
+  },
+  "env": {
+    "local": {
+      "name": "service-local",
+      "vars": {
+        "ENVIRONMENT": "local"
+      }
+    }
   },
   "keep_vars": true,
   "main": "./src/index.ts",
@@ -30,6 +38,7 @@
     ]
   },
   "vars": {
+    "ENVIRONMENT": "production",
     "VERIFY_CONFIG_URL": "https://raw.githubusercontent.com/MetaMask/eth-phishing-detect/refs/heads/main/src/config.json"
   },
   "workers_dev": true
