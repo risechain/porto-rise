@@ -60,6 +60,9 @@ const config = {
       persistPreCalls: false,
     }),
     storageKey: 'porto.store.rise',
+    transports: {
+      [riseTestnet.id]: http(),
+    }
   },
   stg: {
     chains: [Chains.baseSepolia],
