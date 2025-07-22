@@ -230,6 +230,10 @@ export default defineConfig({
             text: 'MerchantRpc',
           },
           {
+            link: '/sdk/api/theme',
+            text: 'Theme',
+          },
+          {
             link: '/sdk/api/storage',
             text: 'Storage',
           },

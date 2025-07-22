@@ -84,6 +84,22 @@ porto.messenger.on('success', (payload) => {
   })
 })
 
+porto.messenger.on('__internal', (payload) => {
+  if (
+    payload.type === 'resize' &&
+    payload.width !== undefined &&
+    Dialog.store.getState().mode === 'iframe'
+  )
+    Dialog.store.setState((state) =>
+      payload.width === undefined
+        ? state
+        : {
+            ...state,
+            display: payload.width > 460 ? 'floating' : 'drawer',
+          },
+    )
+})
+
 porto.ready()
 
 const rootElement = document.querySelector('div#root')
@@ -152,10 +168,7 @@ document.addEventListener('keydown', (event) => {
         }),
       )
 
-      document.documentElement.classList.remove(
-        'scheme-light',
-        'scheme-light-dark',
-      )
+      document.documentElement.classList.remove('scheme-light-dark')
       document.documentElement.classList.add('scheme-light')
     }
   }
