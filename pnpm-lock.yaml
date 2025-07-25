@@ -118,6 +118,9 @@ catalogs:
       specifier: ^5.0.3
       version: 5.0.5
 
+overrides:
+  porto: workspace:*
+
 patchedDependencies:
   '@tanstack/react-router':
     hash: d040a32b2882bb1304fb0c2ba45e98919dec02b25c255882a212122728960907
@@ -782,8 +785,8 @@ importers:
         specifier: ^4
         version: 4.7.10
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -837,8 +840,8 @@ importers:
         specifier: ^15
         version: 15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -871,8 +874,8 @@ importers:
         specifier: ^5
         version: 5.77.1(react@19.1.0)
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -914,8 +917,8 @@ importers:
         specifier: ^5
         version: 5.77.1(react@19.1.0)
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -966,8 +969,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -1021,8 +1024,8 @@ importers:
         specifier: ^15
         version: 15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -1055,8 +1058,8 @@ importers:
         specifier: ^5
         version: 5.77.1(react@19.1.0)
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -1104,8 +1107,8 @@ importers:
         specifier: ^5
         version: 5.77.1(react@19.1.0)
       porto:
-        specifier: latest
-        version: 0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28)
+        specifier: workspace:*
+        version: link:../../src
       react:
         specifier: ^19
         version: 19.1.0
@@ -7761,26 +7764,6 @@ packages:
   pony-cause@2.1.11:
     resolution: {integrity: sha512-M7LhCsdNbNgiLYiP4WjsfLUuFmCfnjdF6jKe2R9NKl4WFN+HZPGHJZ9lnLP7f9ZnKe3U9nuWD0szirmj+migUg==}
     engines: {node: '>=12.0.0'}
-
-  porto@0.0.54:
-    resolution: {integrity: sha512-Qghx0r7aPlWz7QmhNQEwjgtBmJKXWzxOdNAPk8J4IE7OjQM7r/FVlxNu/GL+Uw8DB7Ug79Rm32XRg3KQSf/wpQ==}
-    hasBin: true
-    peerDependencies:
-      '@tanstack/react-query': '>=5.59.0'
-      '@wagmi/core': '>=2.16.3'
-      react: '>=18'
-      typescript: '>=5.4.0'
-      viem: '>=2.28.0'
-      wagmi: '>=2.0.0'
-    peerDependenciesMeta:
-      '@tanstack/react-query':
-        optional: true
-      react:
-        optional: true
-      typescript:
-        optional: true
-      wagmi:
-        optional: true
 
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
@@ -17924,27 +17907,6 @@ snapshots:
       points-on-curve: 0.2.0
 
   pony-cause@2.1.11: {}
-
-  porto@0.0.54(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(@wagmi/core@2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)))(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(wagmi@2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28))(zod@3.25.28):
-    dependencies:
-      '@wagmi/core': 2.17.2(patch_hash=049ef0ca2574b9586b51482584b89fb1376b94c1a64fe84d4c0ed4a1e795d9f3)(@tanstack/query-core@5.77.1)(@types/react@19.1.5)(react@19.1.0)(typescript@5.8.3)(use-sync-external-store@1.5.0(react@19.1.0))(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))
-      effect: 3.16.12
-      idb-keyval: 6.2.2
-      mipd: 0.0.7(typescript@5.8.3)
-      open: 10.1.2
-      ox: 0.8.4(typescript@5.8.3)(zod@3.25.28)
-      viem: 2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28)
-      zustand: 5.0.5(@types/react@19.1.5)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
-    optionalDependencies:
-      '@tanstack/react-query': 5.77.1(react@19.1.0)
-      react: 19.1.0
-      typescript: 5.8.3
-      wagmi: 2.15.4(@tanstack/query-core@5.77.1)(@tanstack/react-query@5.77.1(react@19.1.0))(@types/react@19.1.5)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.28))(zod@3.25.28)
-    transitivePeerDependencies:
-      - '@types/react'
-      - immer
-      - use-sync-external-store
-      - zod
 
   possible-typed-array-names@1.1.0: {}
 
