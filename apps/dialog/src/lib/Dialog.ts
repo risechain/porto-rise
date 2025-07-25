@@ -1,4 +1,4 @@
-import { Theme } from '@porto/apps'
+import type { Theme } from '@porto/apps'
 import type { Address } from 'ox'
 import type { Messenger } from 'porto'
 import * as Zustand from 'zustand'
@@ -24,23 +24,9 @@ export const store = createStore(
         return undefined
       })()
 
-      const customTheme = (() => {
-        const themeJson = new URLSearchParams(window.location.search).get(
-          'theme',
-        )
-        try {
-          return themeJson === null
-            ? undefined
-            : Theme.parseJsonTheme(themeJson)
-        } catch (error) {
-          console.warn('Failed to parse theme:', error)
-          return undefined
-        }
-      })()
-
       return {
         accountMetadata: {},
-        customTheme,
+        customTheme: undefined,
         display: 'full',
         error: null,
         mode: 'popup-standalone',
