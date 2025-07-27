@@ -22,17 +22,10 @@ on:
       env:
         type: string
         description: 'Environment to use for tests'
-        default: 'dev'
+        default: 'stg'
       rpc-url:
         type: string
         description: 'RPC URL to use for tests'
-        default: ''
-      dispatch-type:
-        type: choice
-        description: 'Dispatch type'
-        options:
-          - 'release'
-          - 'deployment'
         default: ''
       # Test selection inputs
       test-local-browser:
@@ -84,7 +77,7 @@ jobs:
           echo "short_sha=$short_sha" >> $GITHUB_OUTPUT
 
   test:
-    name: "Tests (Env: ${{ matrix.env }}, Runtime: ${{ matrix.browser == 'true' && 'Browser' || 'Node' }})"
+    name: "Tests (Env: ${{ matrix.env }}, Runtime: ${{ matrix.browser == 'true' && 'Browser' || 'Node.js' }})"
     needs: relay-release
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -109,7 +102,6 @@ jobs:
       VITE_FAUCET_PRIVATE_KEY: ${{ secrets.VITE_FAUCET_PRIVATE_KEY }}
       VITE_FAUCET_PRIVATE_KEY_RELEASE: ${{ secrets.VITE_FAUCET_PRIVATE_KEY_RELEASE }}
       VITE_FAUCET_PRIVATE_KEY_DEPLOYMENT: ${{ secrets.VITE_FAUCET_PRIVATE_KEY_DEPLOYMENT }}
-      VITE_DISPATCH_TYPE: ${{ inputs.dispatch-type }}
       VITE_RELAY_VERSION: ${{ needs.relay-release.outputs.relay_version || inputs.relay-ref }}
       VITE_RPC_URL: ${{ inputs.rpc-url }}
 
