@@ -5,7 +5,7 @@ import { type AnvilParameters, anvil } from 'prool/instances'
 
 import { poolId } from './prool.js'
 
-export const enabled = import.meta.env.VITE_DEFAULT_ENV === 'anvil'
+export const enabled = process.env.VITE_DEFAULT_ENV === 'anvil'
 
 export const instances = {
   portoDev: defineAnvil({
