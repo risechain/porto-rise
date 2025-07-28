@@ -60,7 +60,7 @@ export async function buildMessage<chain extends Chain | undefined>(
     if (siwe.nonce) return siwe.nonce
     if (!authUrl?.nonce)
       throw new Error('`nonce` or `authUrl.nonce` is required.')
-    const response = await fetch(authUrl.nonce)
+    const response = await fetch(authUrl.nonce, { method: 'POST' })
     const res = await response.json().catch(() => undefined)
     if (!res?.nonce) throw new Error('`nonce` or `authUrl.nonce` is required.')
     return res.nonce

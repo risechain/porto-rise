@@ -35,7 +35,7 @@ import { generateSiweNonce } from 'viem/siwe'
 const app = new Hono().basePath('/api')
 const porto = Porto.create()
 
-app.get('/siwe/nonce', (c) => c.json({ nonce: generateSiweNonce() }))
+app.post('/siwe/nonce', (c) => c.json({ nonce: generateSiweNonce() }))
 
 app.post('/siwe/verify', async (c) => { /* ... */ })
 
@@ -72,7 +72,7 @@ import { generateSiweNonce, parseSiweMessage } from 'viem/siwe' // [!code ++]
 const app = new Hono().basePath('/api')
 const porto = Porto.create()
 
-app.get('/siwe/nonce', (c) => c.text(generateSiweNonce()))
+app.post('/siwe/nonce', (c) => c.text(generateSiweNonce()))
 
 app.post('/siwe/verify', async (c) => { 
   const { message, signature } = await c.req.json() // [!code ++]

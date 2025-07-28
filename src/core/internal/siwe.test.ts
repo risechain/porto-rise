@@ -132,7 +132,7 @@ describe('buildMessage', () => {
 
   test('behavior: fetches nonce from authUrl', async () => {
     server = await Http.createServer((req, res) => {
-      if (req.method === 'GET' && req.url === '/nonce') {
+      if (req.method === 'POST' && req.url === '/nonce') {
         res.setHeader('Content-Type', 'application/json')
         res.end(JSON.stringify({ nonce: 'fetchednonce12345' }))
       } else {
@@ -256,7 +256,7 @@ describe('buildMessage', () => {
 
   test('error: handles invalid JSON response when getting nonce', async () => {
     server = await Http.createServer((req, res) => {
-      if (req.method === 'GET' && req.url === '/nonce') {
+      if (req.method === 'POST' && req.url === '/nonce') {
         res.end('invalid json')
       } else {
         res.statusCode = 404
@@ -279,7 +279,7 @@ describe('buildMessage', () => {
 
   test('error: handles missing nonce in response', async () => {
     server = await Http.createServer((req, res) => {
-      if (req.method === 'GET' && req.url === '/nonce') {
+      if (req.method === 'POST' && req.url === '/nonce') {
         res.setHeader('Content-Type', 'application/json')
         res.end(JSON.stringify({})) // No nonce field
       } else {

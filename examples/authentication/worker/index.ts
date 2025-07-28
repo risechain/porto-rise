@@ -11,7 +11,7 @@ const porto = Porto.create()
 
 const app = new Hono<{ Bindings: Env }>().basePath('/api')
 
-app.get('/siwe/nonce', async (c) => {
+app.post('/siwe/nonce', async (c) => {
   // Generate a nonce to be used in the SIWE message.
   // This is used to prevent replay attacks.
   const nonce = generateSiweNonce()
