@@ -1,4 +1,3 @@
-import type * as Hex from 'ox/Hex'
 import { afterEach, describe, expect, test } from 'vitest'
 import * as Http from '../../../test/src/http.js'
 import { getPorto } from '../../../test/src/porto.js'
@@ -22,8 +21,10 @@ describe('authenticate', () => {
         req.on('end', () => {
           const data = JSON.parse(body)
           expect(data).toEqual({
+            address: '0x1234567890123456789012345678901234567890',
             message: 'test message',
             signature: '0xdeadbeef',
+            walletAddress: '0x1234567890123456789012345678901234567890',
           })
           res.end('OK')
         })
@@ -34,26 +35,28 @@ describe('authenticate', () => {
     })
 
     await SiweModule.authenticate({
+      address: '0x1234567890123456789012345678901234567890',
       authUrl: {
         logout: `${server.url}/logout`,
         nonce: `${server.url}/nonce`,
         verify: `${server.url}/verify`,
       },
       message: 'test message',
-      signature: '0xdeadbeef' as Hex.Hex,
+      signature: '0xdeadbeef',
     })
   })
 
   test('error: propagates fetch errors', async () => {
     await expect(
       SiweModule.authenticate({
+        address: '0x1234567890123456789012345678901234567890',
         authUrl: {
           logout: 'http://localhost:99999/logout',
           nonce: 'http://localhost:99999/nonce',
           verify: 'http://localhost:99999/verify',
         },
         message: 'test message',
-        signature: '0xdeadbeef' as Hex.Hex,
+        signature: '0xdeadbeef',
       }),
     ).rejects.toThrow()
   })
