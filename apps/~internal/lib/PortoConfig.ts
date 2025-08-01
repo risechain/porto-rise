@@ -45,12 +45,12 @@ const config = {
         contracts: {
           ...riseTestnet.contracts,
           portoAccount: {
-            address: '0xf6b3ddc789396f3cc8e71956c1e405d3398203ec',
+            address: '0x912a428b1a7e7cb7bb2709a2799a01c020c5acd9',
           },
         },
         rpcUrls: {
           default: {
-            http: ['http://localhost:9200'],
+            http: ['https://rise-testnet-porto.fly.dev'],
           },
         },
       },
