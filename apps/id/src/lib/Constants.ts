@@ -61,6 +61,6 @@ export const defaultAssets: Record<
       logo: '/icons/eth.svg',
       name: 'Ethereum',
       symbol: 'ETH',
-    }
-  ]
+    },
+  ],
 }

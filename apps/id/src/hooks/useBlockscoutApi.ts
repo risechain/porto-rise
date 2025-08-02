@@ -9,8 +9,7 @@ import { urlWithCorsBypass } from '~/lib/Constants'
 import { useReadBalances } from './useReadBalances'
 
 export function addressApiEndpoint(chainId: PortoConfig.ChainId) {
-  if (chainId === anvil.id)
-    return 'https://explorer.ithaca.xyz/api/v2'
+  if (chainId === anvil.id) return 'https://explorer.ithaca.xyz/api/v2'
   if (chainId === riseTestnet.id)
     return 'https://explorer.testnet.riselabs.xyz/api/v2'
   throw new Error(`Unsupported chainId: ${chainId}`)
