@@ -1,7 +1,7 @@
 import * as Ariakit from '@ariakit/react'
 import { Button, Spinner, Toast } from '@porto/apps/components'
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
-import { baseSepolia } from 'porto/core/Chains'
+import { riseTestnet } from 'porto/core/Chains'
 import { Hooks } from 'porto/wagmi'
 import * as React from 'react'
 import { toast } from 'sonner'
@@ -81,7 +81,7 @@ function RouteComponent() {
       let address = await tryConnect(connector)
       if (!address) {
         await switchChain.switchChainAsync({
-          chainId: baseSepolia.id,
+          chainId: riseTestnet.id,
         })
         address = await tryConnect(connector)
       }
