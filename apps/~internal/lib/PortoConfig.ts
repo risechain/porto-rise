@@ -1,9 +1,7 @@
 import { Chains, Mode } from 'porto'
 import type { Porto } from 'porto/remote'
 import { http, type ValueOf } from 'viem'
-import { riseTestnet } from 'viem/chains'
 import * as Env from './Env'
-import * as Sentry from './Sentry'
 
 const mock = import.meta.env.MODE === 'test'
 
@@ -16,64 +14,38 @@ const config = {
     }),
   },
   dev: {
-    chains: [Chains.portoDev],
-    feeToken: 'EXP',
+    chains: [Chains.riseTestnet],
+    feeToken: 'ETH',
     mode: Mode.rpcServer({
       mock,
       persistPreCalls: false,
     }),
     storageKey: 'porto.store.dev',
     transports: {
-      [Chains.portoDev.id]: http(undefined, Sentry.httpTransportOptions()),
+      [Chains.riseTestnet.id]: http(undefined),
     },
   },
   prod: {
-    chains: [Chains.base],
-    feeToken: 'USDC',
+    chains: [Chains.riseTestnet],
+    feeToken: 'ETH',
     mode: Mode.rpcServer({
       mock,
       persistPreCalls: false,
     }),
     transports: {
-      [Chains.base.id]: http(undefined, Sentry.httpTransportOptions()),
-    },
-  },
-  rise: {
-    chains: [
-      {
-        ...riseTestnet,
-        contracts: {
-          ...riseTestnet.contracts,
-          portoAccount: {
-            address: '0x912a428b1a7e7cb7bb2709a2799a01c020c5acd9',
-          },
-        },
-        rpcUrls: {
-          default: {
-            http: ['https://rise-testnet-porto.fly.dev'],
-          },
-        },
-      },
-    ],
-    mode: Mode.rpcServer({
-      mock,
-      persistPreCalls: false,
-    }),
-    storageKey: 'porto.store.rise',
-    transports: {
-      [riseTestnet.id]: http(),
+      [Chains.riseTestnet.id]: http(undefined),
     },
   },
   stg: {
-    chains: [Chains.baseSepolia],
-    feeToken: 'EXP',
+    chains: [Chains.riseTestnet],
+    feeToken: 'ETH',
     mode: Mode.rpcServer({
       mock,
       persistPreCalls: false,
     }),
     storageKey: 'porto.store.stg',
     transports: {
-      [Chains.baseSepolia.id]: http(undefined, Sentry.httpTransportOptions()),
+      [Chains.riseTestnet.id]: http(undefined),
     },
   },
 } as const satisfies Record<Env.Env, Partial<Porto.Config>>
@@ -88,9 +60,6 @@ const dialogHosts = {
   prod: import.meta.env.PROD
     ? 'https://id.porto.sh/dialog/'
     : 'https://prod.localhost:5174/dialog/',
-  rise: import.meta.env.PROD
-    ? undefined
-    : 'https://rise.localhost:5174/dialog/',
   stg: import.meta.env.PROD
     ? 'https://stg.id.porto.sh/dialog/'
     : 'https://localhost:5174/dialog/',
