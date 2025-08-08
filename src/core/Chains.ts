@@ -82,6 +82,24 @@ export const riseTestnet = /*#__PURE__*/ define({
   },
 })
 
+export const riseTestnetLocal = /*#__PURE__*/ define({
+  ...chains.riseTestnet,
+  contracts: {
+    ...chains.riseTestnet.contracts,
+    portoAccount: {
+      address: '0x912a428b1a7e7cb7bb2709a2799a01c020c5acd9',
+    },
+  },
+  rpcUrls: {
+    default: {
+      http: [
+        'http://localhost:9119',
+        ...chains.riseTestnet.rpcUrls.default.http,
+      ],
+    },
+  },
+})
+
 export const portoDev = /*#__PURE__*/ define({
   blockExplorers: {
     default: {

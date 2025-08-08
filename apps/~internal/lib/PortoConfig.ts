@@ -14,7 +14,7 @@ const config = {
     }),
   },
   dev: {
-    chains: [Chains.riseTestnet],
+    chains: [Chains.riseTestnetLocal],
     feeToken: 'ETH',
     mode: Mode.rpcServer({
       mock,
@@ -22,7 +22,7 @@ const config = {
     }),
     storageKey: 'porto.store.dev',
     transports: {
-      [Chains.riseTestnet.id]: http(undefined),
+      [Chains.riseTestnetLocal.id]: http(undefined),
     },
   },
   prod: {
