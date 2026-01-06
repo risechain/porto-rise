@@ -78,6 +78,7 @@ export function useBridge(params: UseBridgeParams) {
           },
         ],
         chainId: selectedChainId as never,
+        timeout: 60_000,
       })
 
       // Get transaction hash from receipts

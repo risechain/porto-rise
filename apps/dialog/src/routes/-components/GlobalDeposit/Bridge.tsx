@@ -117,10 +117,7 @@ export function Bridge(props: Readonly<BridgeProps>) {
               </div>
               <div className="flex-1">
                 <div className="font-medium text-sm text-th_base">
-                  Source chain transaction
-                </div>
-                <div className="text-sm text-th_base-secondary">
-                  {sourceChain?.name}
+                  Bridge transaction
                 </div>
                 <ErrorDisplay
                   hidden={bridgeState.status !== 'source-failed'}
@@ -130,7 +127,7 @@ export function Bridge(props: Readonly<BridgeProps>) {
                   <div className="flex items-center gap-2">
                     <a
                       className="flex items-center gap-1 text-sm text-th_base-secondary hover:underline"
-                      href={`${sourceChain?.blockExplorers?.default?.url}/tx/${bridgeState.sourceTxHash}`}
+                      href={`https://layerzeroscan.com/tx/${bridgeState.sourceTxHash}`}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -144,53 +141,6 @@ export function Bridge(props: Readonly<BridgeProps>) {
                     />
                   </div>
                 )}
-              </div>
-            </div>
-
-            {/* Destination Chain Status */}
-            <div className="flex items-start gap-2">
-              <div className="mt-1">
-                {bridgeState.status === 'destination-pending' && (
-                  <Spinner color="purple" size="small" />
-                )}
-                {bridgeState.status === 'completed' && (
-                  <CheckCircle className="size-5 text-th_positive" />
-                )}
-                {bridgeState.status === 'failed' && (
-                  <XCircle className="size-5" color="red" />
-                )}
-
-                <CircleDashed
-                  className="block size-5 data-[hidden=true]:hidden"
-                  color="gray"
-                  data-hidden={
-                    bridgeState.status === 'destination-pending' ||
-                    bridgeState.status === 'completed' ||
-                    bridgeState.status === 'failed'
-                  }
-                />
-              </div>
-              <div className="flex-1">
-                <div className="font-medium text-sm text-th_base">
-                  Destination chain receipt
-                </div>
-                <div className="text-sm text-th_base-secondary">
-                  {destChain?.name}
-                </div>
-                {bridgeState.status === 'destination-pending' && (
-                  <div className="mt-1 text-sm text-th_base-secondary">
-                    Waiting for bridge to complete...
-                  </div>
-                )}
-                {bridgeState.status === 'completed' && (
-                  <div className="mt-1 text-sm text-th_positive">
-                    Tokens received successfully
-                  </div>
-                )}
-                <ErrorDisplay
-                  hidden={bridgeState.status !== 'failed'}
-                  message={bridgeState.message ?? ''}
-                />
               </div>
             </div>
           </div>
