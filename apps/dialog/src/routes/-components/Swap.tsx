@@ -14,7 +14,7 @@ import { AddressFormatter, PriceFormatter, ValueFormatter } from '~/utils'
 import ArrowDown from '~icons/lucide/arrow-down'
 import LucideSendToBack from '~icons/lucide/send-to-back'
 import Star from '~icons/ph/star-four-bold'
-import { ActionPreview } from './ActionPreview'
+import { ActionPreview, type GuestMode } from './ActionPreview'
 import type { ActionRequest } from './ActionRequest'
 import { Layout } from './Layout'
 
@@ -27,6 +27,7 @@ export function Swap(props: Swap.Props) {
     chainsPath,
     contractAddress,
     fetchingQuote,
+    guestMode,
     onApprove,
     onReject,
     refreshingQuote,
@@ -57,32 +58,35 @@ export function Swap(props: Swap.Props) {
     <ActionPreview
       account={address}
       actions={
-        <Layout.Footer.Actions>
-          <Button
-            disabled={swapping}
-            onClick={onReject}
-            variant="negative-secondary"
-            width="grow"
-          >
-            Cancel
-          </Button>
-          <Button
-            disabled={!onApprove || fetchingQuote || loading}
-            loading={
-              refreshingQuote
-                ? 'Refreshing quote…'
-                : swapping
-                  ? 'Swapping…'
-                  : undefined
-            }
-            onClick={onApprove}
-            variant="positive"
-            width="grow"
-          >
-            Swap
-          </Button>
-        </Layout.Footer.Actions>
+        guestMode ? undefined : (
+          <Layout.Footer.Actions>
+            <Button
+              disabled={swapping}
+              onClick={onReject}
+              variant="negative-secondary"
+              width="grow"
+            >
+              Cancel
+            </Button>
+            <Button
+              disabled={!onApprove || fetchingQuote || loading}
+              loading={
+                refreshingQuote
+                  ? 'Refreshing quote…'
+                  : swapping
+                    ? 'Swapping…'
+                    : undefined
+              }
+              onClick={onApprove}
+              variant="positive"
+              width="grow"
+            >
+              Swap
+            </Button>
+          </Layout.Footer.Actions>
+        )
       }
+      guestMode={guestMode}
       header={
         <Layout.Header.Default
           icon={swapType === 'convert' ? Star : LucideSendToBack}
@@ -100,7 +104,7 @@ export function Swap(props: Swap.Props) {
             fiatDisplay={fiatDisplay}
             onFiatDisplayChange={setFiatDisplay}
           />
-          <div className="-mx-[10px] relative flex justify-center">
+          <div className="relative -mx-[10px] flex justify-center">
             <hr className="absolute top-1/2 w-full border-th_separator border-dashed" />
             <div className="relative flex size-[24px] items-center justify-center rounded-full bg-th_badge">
               <ArrowDown className="size-[16px] text-th_badge" />
@@ -159,6 +163,7 @@ export namespace Swap {
     chainsPath: readonly Chain[]
     contractAddress?: Address.Address | undefined
     fetchingQuote?: boolean | undefined
+    guestMode?: GuestMode
     onApprove: () => void
     onReject: () => void
     refreshingQuote?: boolean | undefined
@@ -169,7 +174,7 @@ export namespace Swap {
   export function AssetRow(props: AssetRow.Props) {
     const { asset, fiatDisplay, onFiatDisplayChange } = props
 
-    const decimals = asset.decimals ?? 18
+    if (!asset.decimals) return null
 
     const fiatValue = asset.fiat
       ? PriceFormatter.format(Math.abs(asset.fiat.value))
@@ -177,7 +182,7 @@ export namespace Swap {
 
     const tokenValue = `${ValueFormatter.format(
       asset.value < 0n ? -asset.value : asset.value,
-      decimals,
+      asset.decimals,
     )} ${asset.symbol}`
 
     const assetName = asset.name || asset.symbol || 'Unknown'

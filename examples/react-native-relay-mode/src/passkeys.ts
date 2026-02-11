@@ -3,30 +3,31 @@ import { Platform } from 'react-native'
 import * as passkey from 'react-native-passkeys'
 import type OxWebAuthn from '../node_modules/ox/_types/core/internal/webauthn'
 
-const RELYING_PARTY_DOMAIN = process.env.EXPO_PUBLIC_SERVER_DOMAIN
-if (!RELYING_PARTY_DOMAIN)
-  console.warn('\n\n\nEXPO_PUBLIC_SERVER_DOMAIN is not set\n\n\n')
+const RELYING_PARTY_DOMAIN = process.env.EXPO_PUBLIC_SERVER_URL
+if (!RELYING_PARTY_DOMAIN) console.warn('EXPO_PUBLIC_SERVER_URL is not set')
+
+const name = 'porto-relay-mode'
 
 export const rp = {
   id: Platform.select({
-    android: RELYING_PARTY_DOMAIN,
-    ios: RELYING_PARTY_DOMAIN,
+    android: RELYING_PARTY_DOMAIN.replace('https://', ''),
+    ios: RELYING_PARTY_DOMAIN.replace('https://', ''),
   }),
-  name: 'porto-react-native-relay-mode',
+  name,
 } satisfies PublicKeyCredentialRpEntity
 
 export const user = {
-  displayName: 'porto-react-native-relay-mode',
+  displayName: name.replaceAll('-', ' ').toLocaleUpperCase(),
   /**
    * @note
    */
   id: bufferToBase64URL(new Uint8Array(16)),
-  name: 'porto-react-native-relay-mode',
+  name,
 } satisfies PublicKeyCredentialUserEntityJSON
 
 export const authenticatorSelection = {
-  residentKey: 'required',
-  userVerification: 'required',
+  residentKey: 'preferred',
+  userVerification: 'preferred',
 } satisfies AuthenticatorSelectionCriteria
 
 export async function createFn(
@@ -124,9 +125,6 @@ export async function getFn(
 
 function arrayBufferToBase64URL(buffer: ArrayBuffer) {
   return Base64.fromBytes(new Uint8Array(buffer), { url: true })
-}
-function utf8StringToBuffer(value: string) {
-  return new TextEncoder().encode(value) as unknown as ArrayBuffer
 }
 
 function base64URLToArrayBuffer(input: string) {

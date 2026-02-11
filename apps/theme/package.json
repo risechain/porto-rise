@@ -14,7 +14,7 @@
     "rise-wallet": "workspace:*"
   },
   "devDependencies": {
-    "@types/bun": "^1.2.15",
+    "@types/bun": "^1.3.8",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "globals": "catalog:",

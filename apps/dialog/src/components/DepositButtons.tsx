@@ -24,6 +24,7 @@ import {
   WagmiProvider,
 } from 'wagmi'
 import { porto } from '~/lib/Porto'
+import type { config as registeredConfig } from '~/lib/Wagmi'
 
 const iframeMipd = createStore()
 const queryClient = new QueryClient()
@@ -71,7 +72,10 @@ export function DepositButtons(props: {
   }, [providers])
 
   return (
-    <WagmiProvider config={config} reconnectOnMount={false}>
+    <WagmiProvider
+      config={config as unknown as typeof registeredConfig}
+      reconnectOnMount={false}
+    >
       <QueryClientProvider client={queryClient}>
         <div className="flex w-full flex-col gap-[8px]">
           <Deposit

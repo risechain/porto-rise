@@ -5,6 +5,7 @@
   "scripts": {
     "build": "vite build",
     "check:types": "tsc --noEmit",
+    "check:types_fast": "tsgo --noEmit",
     "dev": "vite --port 5173",
     "dev:anvil": "ANVIL=true vite --port 5173",
     "start": "vite preview"
@@ -14,11 +15,11 @@
     "@porto/apps": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "eruda": "^3.4.3",
-    "mipd": "^0.0.7",
+    "mipd": "catalog:",
     "ox": "catalog:",
-    "rise-wallet": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "rise-wallet": "workspace:*",
     "tailwindcss": "catalog:",
     "viem": "catalog:"
   },
@@ -27,7 +28,7 @@
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "globals": "catalog:",
-    "prool": "^0.0.23",
+    "prool": "^0.2.2",
     "typescript": "catalog:",
     "unplugin-icons": "catalog:",
     "vite": "catalog:",

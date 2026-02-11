@@ -150,7 +150,7 @@ export namespace Layout {
           <div className="text-[13px] text-th_base-secondary">Account</div>
 
           <button
-            className="-my-1 -mx-2 flex items-center gap-1.5 rounded-lg px-2 py-1 hover:not-disabled:bg-th_base-hovered"
+            className="-mx-2 -my-1 flex items-center gap-1.5 rounded-lg px-2 py-1 hover:not-disabled:bg-th_base-hovered"
             disabled={!onClick}
             onClick={onClick}
             type="button"

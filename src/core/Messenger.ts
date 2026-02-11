@@ -6,6 +6,7 @@ import type * as Theme from '../theme/Theme.js'
 import * as promise from './internal/promise.js'
 import * as Utils from './internal/utils.js'
 import type * as Porto from './Porto.js'
+import type * as RpcSchema from './RpcSchema.js'
 
 /** Messenger interface. */
 export type Messenger = {
@@ -78,11 +79,40 @@ export type Schema = [
     response: undefined
   },
   {
+    topic: 'account'
+    payload: {
+      account: RpcSchema.wallet_connect.Response['accounts'][number]
+    }
+    response: undefined
+  },
+  {
     topic: '__internal'
     payload:
       | {
           type: 'init'
           chainIds?: readonly number[] | undefined
+          features?:
+            | {
+                bugReporting?: boolean | undefined
+                emailInput?: boolean | undefined
+                signUpLink?: boolean | undefined
+                createAccount?: boolean | undefined
+              }
+            | undefined
+          labels?:
+            | {
+                signInPrompt?: string | undefined
+                signIn?: string | undefined
+                signUp?: string | undefined
+                createAccount?: string | undefined
+                signInAlt?: string | undefined
+                dialogTitle?: string | undefined
+                exampleEmail?: string | undefined
+                bugReportEmail?: string | undefined
+                switchAccount?: string | undefined
+                signUpLink?: string | undefined
+              }
+            | undefined
           mode:
             | 'inline-iframe'
             | 'iframe'
@@ -111,7 +141,29 @@ export type Schema = [
         }
       | {
           type: 'set-theme'
-          theme: Theme.ThemeFragment
+          features?:
+            | {
+                bugReporting?: boolean | undefined
+                emailInput?: boolean | undefined
+                signUpLink?: boolean | undefined
+                createAccount?: boolean | undefined
+              }
+            | undefined
+          labels?:
+            | {
+                signInPrompt?: string | undefined
+                signIn?: string | undefined
+                signUp?: string | undefined
+                createAccount?: string | undefined
+                signInAlt?: string | undefined
+                dialogTitle?: string | undefined
+                exampleEmail?: string | undefined
+                bugReportEmail?: string | undefined
+                switchAccount?: string | undefined
+                signUpLink?: string | undefined
+              }
+            | undefined
+          theme?: Theme.ThemeFragment | undefined
         }
       | {
           // backward compatibility from 0.2.7 (to be removed in a future version)

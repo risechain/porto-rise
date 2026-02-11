@@ -135,7 +135,7 @@ export function Email(props: Email.Props) {
           >
             {/* If "Sign in" button is present, show the "First time?" text for sign up. */}
             {actions.includes('sign-in') && (
-              <div className="-tracking-[2.8%] flex items-center whitespace-nowrap text-[12px] text-th_base-secondary leading-[17px]">
+              <div className="flex items-center whitespace-nowrap text-[12px] text-th_base-secondary leading-[17px] -tracking-[2.8%]">
                 First time?
                 <div className="ms-2 h-px w-full bg-th_separator" />
               </div>
@@ -159,7 +159,7 @@ export function Email(props: Email.Props) {
                 placeholder="example@risechain.com"
                 type="email"
               />
-              <div className="-tracking-[2.8%] absolute end-3 text-[12px] text-th_base-secondary leading-normal">
+              <div className="absolute end-3 text-[12px] text-th_base-secondary leading-normal -tracking-[2.8%]">
                 Optional
               </div>
             </div>

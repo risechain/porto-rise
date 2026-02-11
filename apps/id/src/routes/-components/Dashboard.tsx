@@ -205,7 +205,7 @@ export function Dashboard() {
               {emailData ? (
                 <div className="flex items-center gap-2">
                   {/* TODO: Sparkle spotlight effect `bg-repeat` https://tailwindcss.com/docs/background-repeat */}
-                  <div className="-tracking-[2.8%] min-w-10 px-2 font-medium text-[15px] text-gray12 blur-sm">
+                  <div className="min-w-10 px-2 font-medium text-[15px] text-gray12 -tracking-[2.8%] blur-sm">
                     {emailData.email}
                   </div>
                   {emailData.verified ? (
@@ -217,10 +217,10 @@ export function Dashboard() {
                         className="flex w-[230px] flex-col gap-1 rounded-[11px] border border-gray3 bg-gray1 p-4"
                         gutter={4}
                       >
-                        <Ariakit.PopoverHeading className="-tracking-[0.25px] font-medium text-[14px] text-gray12">
+                        <Ariakit.PopoverHeading className="font-medium text-[14px] text-gray12 -tracking-[0.25px]">
                           Your email is verified.
                         </Ariakit.PopoverHeading>
-                        <Ariakit.PopoverDescription className="-tracking-[0.25px] text-[13px] text-gray9 leading-[18px]">
+                        <Ariakit.PopoverDescription className="text-[13px] text-gray9 leading-[18px] -tracking-[0.25px]">
                           It can be used to restore your account to new devices.
                         </Ariakit.PopoverDescription>
                         <Button
@@ -243,10 +243,10 @@ export function Dashboard() {
                         className="flex w-[240px] flex-col gap-1 rounded-[11px] border border-gray3 bg-gray1 p-4"
                         gutter={4}
                       >
-                        <Ariakit.PopoverHeading className="-tracking-[0.25px] font-medium text-[14px] text-gray12">
+                        <Ariakit.PopoverHeading className="font-medium text-[14px] text-gray12 -tracking-[0.25px]">
                           Email not verified
                         </Ariakit.PopoverHeading>
-                        <Ariakit.PopoverDescription className="-tracking-[0.25px] text-[13px] text-gray9 leading-[18px]">
+                        <Ariakit.PopoverDescription className="text-[13px] text-gray9 leading-[18px] -tracking-[0.25px]">
                           Please click the verification link to fully enable
                           Balance.
                         </Ariakit.PopoverDescription>
@@ -291,6 +291,7 @@ export function Dashboard() {
                     const formData = new FormData(
                       event.target as HTMLFormElement,
                     )
+                    // biome-ignore lint/suspicious/noNonNullAssertedOptionalChain: _
                     const email = formData.get('email')?.toString()!
                     setEmailData({ email, verified: false })
                     setEmail('')
@@ -303,7 +304,7 @@ export function Dashboard() {
                     Email
                   </label>
                   <input
-                    className="-tracking-[2.8%] min-w-10 px-2 font-medium text-[15px] text-gray12 outline-none placeholder:text-gray9"
+                    className="min-w-10 px-2 font-medium text-[15px] text-gray12 -tracking-[2.8%] outline-none placeholder:text-gray9"
                     name="email"
                     onChange={(event) => setEmail(event.target.value)}
                     pattern=".*@.*\..+"
@@ -753,7 +754,6 @@ function PaginatedTable<T>({
         <tbody className="border-transparent border-t-10">
           {itemsToShow && itemsToShow?.length > 0 ? (
             itemsToShow?.map((item, index) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: _
               <React.Fragment key={index}>{renderRow(item)}</React.Fragment>
             ))
           ) : (
@@ -1070,7 +1070,7 @@ function AssetRow(
                         <TruncatedAddress
                           address={sendFormState.values.sendRecipient}
                           className={cx(
-                            '-top-0 absolute w-min cursor-pointer text-left text-xs peer-focus:hidden sm:text-sm',
+                            'absolute -top-0 w-min cursor-pointer text-left text-xs peer-focus:hidden sm:text-sm',
                             !valid && 'hidden',
                           )}
                           end={5}

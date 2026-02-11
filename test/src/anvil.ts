@@ -1,7 +1,6 @@
 import { resolve } from 'node:path'
 import { type Hex, Mnemonic, RpcTransport } from 'ox'
-import { createServer } from 'prool'
-import { type AnvilParameters, anvil } from 'prool/instances'
+import { Instance, Server } from 'prool'
 import { type PrivateKeyAccount, privateKeyToAccount } from 'viem/accounts'
 import type { FixedArray } from '../../src/core/internal/types.js'
 import { poolId } from './prool.js'
@@ -37,7 +36,7 @@ export const instances = {
 // Utilities
 /////////////////////////////////////////////////////////////////
 
-function defineAnvil(parameters: AnvilParameters) {
+function defineAnvil(parameters: Instance.anvil.Parameters) {
   const { port } = parameters
   const rpcUrl = `http://127.0.0.1:${port}/${poolId}`
 
@@ -58,8 +57,8 @@ function defineAnvil(parameters: AnvilParameters) {
     },
     rpcUrl,
     async start() {
-      return await createServer({
-        instance: anvil(config),
+      return await Server.create({
+        instance: Instance.anvil(config),
         port,
       }).start()
     },

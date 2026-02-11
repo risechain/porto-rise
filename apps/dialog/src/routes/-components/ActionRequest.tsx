@@ -17,6 +17,7 @@ import {
 } from 'viem'
 import * as Calls from '~/lib/Calls'
 import * as Errors from '~/lib/DialogErrors'
+import type { GuestStatus } from '~/lib/guestMode'
 import { porto } from '~/lib/Porto'
 import * as Tokens from '~/lib/Tokens'
 import { Layout } from '~/routes/-components/Layout'
@@ -28,7 +29,7 @@ import LucideMusic from '~icons/lucide/music'
 import LucideSparkles from '~icons/lucide/sparkles'
 import LucideVideo from '~icons/lucide/video'
 import Star from '~icons/ph/star-four-bold'
-import { ActionPreview } from '../-components/ActionPreview'
+import { ActionPreview, type GuestMode } from '../-components/ActionPreview'
 import { AddFunds } from '../-components/AddFunds'
 import { Approve } from '../-components/Approve'
 import { ErrorScreen } from '../-components/ErrorScreen'
@@ -42,12 +43,25 @@ export function ActionRequest(props: ActionRequest.Props) {
     calls,
     chainId,
     feeToken,
+    guestMode,
+    guestStatus,
     loading,
     merchantUrl,
     onApprove,
+    onGuestSignIn,
+    onGuestSignUp,
     onReject,
     requiredFunds,
   } = props
+
+  const guestModeProps: GuestMode | undefined =
+    guestMode && guestStatus && onGuestSignIn && onGuestSignUp
+      ? {
+          onSignIn: onGuestSignIn,
+          onSignUp: onGuestSignUp,
+          status: guestStatus,
+        }
+      : undefined
 
   const account = Hooks.useAccount(porto, { address })
 
@@ -192,6 +206,7 @@ export function ActionRequest(props: ActionRequest.Props) {
         capabilities={capabilities}
         chainsPath={chainsPath}
         fetchingQuote={fetchingQuote}
+        guestMode={guestModeProps}
         onApprove={() => {
           if (prepareCallsQuery.isSuccess) onApprove(prepareCallsQuery.data)
         }}
@@ -212,6 +227,7 @@ export function ActionRequest(props: ActionRequest.Props) {
         chainsPath={chainsPath}
         contractAddress={calls[0]?.to}
         fetchingQuote={fetchingQuote}
+        guestMode={guestModeProps}
         onApprove={() => {
           if (prepareCallsQuery.isSuccess) onApprove(prepareCallsQuery.data)
         }}
@@ -230,6 +246,7 @@ export function ActionRequest(props: ActionRequest.Props) {
         capabilities={capabilities}
         chainsPath={chainsPath}
         fetchingQuote={fetchingQuote}
+        guestMode={guestModeProps}
         onApprove={() => {
           if (prepareCallsQuery.isSuccess) onApprove(prepareCallsQuery.data)
         }}
@@ -272,6 +289,7 @@ export function ActionRequest(props: ActionRequest.Props) {
           </Button>
         </Layout.Footer.Actions>
       }
+      guestMode={guestModeProps}
       header={
         <Layout.Header.Default
           icon={Star}
@@ -309,12 +327,16 @@ export namespace ActionRequest {
     chainId?: number | undefined
     checkBalance?: boolean | undefined
     feeToken?: Token.Symbol | Address.Address | undefined
+    guestMode?: boolean | undefined
+    guestStatus?: GuestStatus | undefined
     loading?: boolean | undefined
     merchantUrl?: string | undefined
     requiredFunds?:
       | Calls.prepareCalls.queryOptions.Options['requiredFunds']
       | undefined
     onApprove: (data: Calls.prepareCalls.useQuery.Data) => void
+    onGuestSignIn?: (() => void) | undefined
+    onGuestSignUp?: ((email?: string) => void) | undefined
     onReject: () => void
   }
 

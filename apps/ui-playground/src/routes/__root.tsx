@@ -11,7 +11,7 @@ function RootComponent() {
   return (
     <div className="grid h-screen min-w-200 select-none grid-cols-[220px_1fr] overflow-hidden bg-th_base-plane text-th_base">
       <Sidebar />
-      <div className="focus-visible:-outline-offset-2 overflow-y-auto px-16 py-12 focus-visible:outline-2 focus-visible:outline-th_focus">
+      <div className="overflow-y-auto px-16 py-12 focus-visible:outline-2 focus-visible:outline-th_focus focus-visible:-outline-offset-2">
         <Outlet />
       </div>
     </div>

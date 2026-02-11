@@ -192,31 +192,31 @@ describe('Quote', () => {
     { chainId: '0x5', expected: 5 },
     { chainId: '0x89', expected: 137 },
     { chainId: '0x10435', expected: 66613 },
-  ])(
-    'behavior: decodes quote with chainId $chainId',
-    ({ chainId, expected }) => {
-      const result = z.parse(Quotes.Quote, {
-        ...validQuoteData,
-        chainId,
-      })
-      expect(result.chainId).toBe(expected)
-    },
-  )
+  ])('behavior: decodes quote with chainId $chainId', ({
+    chainId,
+    expected,
+  }) => {
+    const result = z.parse(Quotes.Quote, {
+      ...validQuoteData,
+      chainId,
+    })
+    expect(result.chainId).toBe(expected)
+  })
 
   test.each([
     { expected: 6, paymentTokenDecimals: 6 },
     { expected: 8, paymentTokenDecimals: 8 },
     { expected: 18, paymentTokenDecimals: 18 },
-  ])(
-    'behavior: decodes quote with paymentTokenDecimals $paymentTokenDecimals',
-    ({ paymentTokenDecimals, expected }) => {
-      const result = z.parse(Quotes.Quote, {
-        ...validQuoteData,
-        paymentTokenDecimals,
-      })
-      expect(result.paymentTokenDecimals).toBe(expected)
-    },
-  )
+  ])('behavior: decodes quote with paymentTokenDecimals $paymentTokenDecimals', ({
+    paymentTokenDecimals,
+    expected,
+  }) => {
+    const result = z.parse(Quotes.Quote, {
+      ...validQuoteData,
+      paymentTokenDecimals,
+    })
+    expect(result.paymentTokenDecimals).toBe(expected)
+  })
 
   test('error: rejects invalid address format for authorizationAddress', () => {
     expect(() =>
@@ -713,14 +713,15 @@ describe('Signed', () => {
       expectedV: undefined,
       expectedYParity: '0x1',
     },
-  ])(
-    'behavior: decodes signed quotes with v=$expectedV yParity=$expectedYParity',
-    ({ data, expectedV, expectedYParity }) => {
-      const result = z.parse(Quotes.Signed, data)
-      expect(result.v).toBe(expectedV)
-      expect(result.yParity).toBe(expectedYParity)
-    },
-  )
+  ])('behavior: decodes signed quotes with v=$expectedV yParity=$expectedYParity', ({
+    data,
+    expectedV,
+    expectedYParity,
+  }) => {
+    const result = z.parse(Quotes.Signed, data)
+    expect(result.v).toBe(expectedV)
+    expect(result.yParity).toBe(expectedYParity)
+  })
 
   test('behavior: inherits all base Quotes fields', () => {
     const result = z.parse(Quotes.Signed, validSignedData)

@@ -223,7 +223,7 @@ export function HomePage() {
       >
         <div className="flex h-full flex-col">
           <header className="mb-5 flex items-center justify-between">
-            <h1 className="-tracking-[0.504px] font-medium text-[18px] leading-normal">
+            <h1 className="font-medium text-[18px] leading-normal -tracking-[0.504px]">
               Try it out
             </h1>
             <Ariakit.DialogDismiss
@@ -302,10 +302,10 @@ function Demo() {
             )}
             {step === 'end' && (
               <div className="flex flex-col gap-4">
-                <h2 className="-tracking-[2.8%] text-center font-medium text-[19px] text-black leading-normal dark:text-white">
+                <h2 className="text-center font-medium text-[19px] text-black leading-normal -tracking-[2.8%] dark:text-white">
                   Get started now
                 </h2>
-                <p className="-tracking-[2.8%] text-center text-[16px] text-gray9 leading-[22px]">
+                <p className="text-center text-[16px] text-gray9 leading-[22px] -tracking-[2.8%]">
                   Now that you’ve experienced some of Porto’s innovations,
                   integrate it into your application today.
                 </p>
@@ -482,7 +482,7 @@ function SignIn(props: { chainId: ChainId; next: () => void }) {
   if (status === 'connected')
     return (
       <div className="flex flex-row items-center gap-4">
-        <div className="-tracking-[2.8%] font-medium text-[15px] text-gray9 leading-normal">
+        <div className="font-medium text-[15px] text-gray9 leading-normal -tracking-[2.8%]">
           You're signed in!
         </div>
 
@@ -500,7 +500,7 @@ function SignIn(props: { chainId: ChainId; next: () => void }) {
     return (
       <div className="flex w-full">
         <Ariakit.Button
-          className="-tracking-[0.448px] flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-gray5 px-3 text-center font-medium text-[16px] text-gray9 leading-normal"
+          className="flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-gray5 px-3 text-center font-medium text-[16px] text-gray9 leading-normal -tracking-[0.448px]"
           disabled
         >
           <LucidePictureInPicture2 className="size-5" />
@@ -512,7 +512,7 @@ function SignIn(props: { chainId: ChainId; next: () => void }) {
   return (
     <div className="flex w-full">
       <Ariakit.Button
-        className="-tracking-[0.448px] flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal outline outline-dashed outline-blue9 outline-offset-2 hover:bg-accentHover"
+        className="flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal -tracking-[0.448px] outline outline-dashed outline-blue9 outline-offset-2 hover:bg-accentHover"
         onClick={() =>
           connect.connect({
             capabilities: {
@@ -608,7 +608,7 @@ export function BuyNow(props: { chainId: ChainId; next: () => void }) {
           className="size-[183px] rounded-[13px] object-cover object-accent"
           src="/sneaker.png"
         />
-        <div className="-tracking-[2.8%] font-medium text-[15px] text-gray9 leading-normal">
+        <div className="font-medium text-[15px] text-gray9 leading-normal -tracking-[2.8%]">
           Purchase complete!
         </div>
       </div>
@@ -624,7 +624,7 @@ export function BuyNow(props: { chainId: ChainId; next: () => void }) {
         />
 
         <div className="-mt-0.5 flex flex-col gap-0.5">
-          <div className="-tracking-[2.8%] font-medium text-[20px] text-black leading-normal dark:text-white">
+          <div className="font-medium text-[20px] text-black leading-normal -tracking-[2.8%] dark:text-white">
             Running Sneaker
           </div>
           <div className="font-medium text-[14px] text-gray10 leading-normal">
@@ -636,7 +636,7 @@ export function BuyNow(props: { chainId: ChainId; next: () => void }) {
       <Ariakit.Button
         aria-disabled={isPending || isConfirming}
         className={cx(
-          '-tracking-[0.448px] flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal hover:bg-accentHover aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
+          'flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal -tracking-[0.448px] hover:bg-accentHover aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
           !(isPending || isConfirming) &&
             'outline outline-dashed outline-blue9 outline-offset-2',
         )}
@@ -797,8 +797,8 @@ export function SendTip(props: {
       </div>
 
       <div className="flex w-full justify-between px-1.5">
-        <div className="-tracking-[2.8%] text-[14px] text-gray9">Received</div>{' '}
-        <div className="-tracking-[2.8%] font-medium text-[14px] text-gray9">
+        <div className="text-[14px] text-gray9 -tracking-[2.8%]">Received</div>{' '}
+        <div className="font-medium text-[14px] text-gray9 -tracking-[2.8%]">
           <span className="text-gray12">
             {ValueFormatter.format(exp1Balance ?? 0)}
           </span>{' '}
@@ -809,7 +809,7 @@ export function SendTip(props: {
       <Ariakit.Button
         aria-disabled={isPending || isConfirming}
         className={cx(
-          '-tracking-[0.448px] flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal hover:bg-accentHover aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
+          'flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal -tracking-[0.448px] hover:bg-accentHover aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
           !(isPending || isConfirming) &&
             'outline outline-dashed outline-blue9 outline-offset-2',
         )}
@@ -991,7 +991,7 @@ export function Subscribe(props: {
     return (
       <div className="w-full max-w-78.75 rounded-[13px] bg-gray1">
         <div className="flex justify-between border-gray4 border-b px-4 pt-4 pb-3.5">
-          <div className="-tracking-[2.8%] font-medium text-[14px] text-gray9 leading-none">
+          <div className="font-medium text-[14px] text-gray9 leading-none -tracking-[2.8%]">
             Your subscriptions
           </div>
           <Ariakit.Button
@@ -1013,18 +1013,18 @@ export function Subscribe(props: {
             />
             <div className="flex flex-col gap-2">
               <div className="h-4 w-[85px] rounded-full bg-gray4" />
-              <div className="-tracking-[2.8%] font-medium text-[13px] text-gray8 leading-none">
+              <div className="font-medium text-[13px] text-gray8 leading-none -tracking-[2.8%]">
                 Tier {'I'.repeat(activeTierIndex + 1)}
               </div>
             </div>
           </div>
 
           <div className="flex flex-col gap-2 text-right">
-            <div className="-tracking-[2.8%] font-medium text-[16px] text-gray12 leading-none">
+            <div className="font-medium text-[16px] text-gray12 leading-none -tracking-[2.8%]">
               {ValueFormatter.format(activeTier.limit)}{' '}
               <span className="text-gray9">EXP1</span>
             </div>
-            <div className="-tracking-[2.8%] font-medium text-[13px] text-gray8 leading-none">
+            <div className="font-medium text-[13px] text-gray8 leading-none -tracking-[2.8%]">
               each {activeTier.period}
             </div>
           </div>
@@ -1063,14 +1063,14 @@ export function Subscribe(props: {
                 value={tier.unit}
               />
 
-              <div className="-tracking-[2.8%] font-medium text-[13px] text-gray9 leading-none peer-checked:text-accent!">
+              <div className="font-medium text-[13px] text-gray9 leading-none -tracking-[2.8%] peer-checked:text-accent!">
                 Tier {'I'.repeat(index + 1)}
               </div>
               <div className="flex flex-col gap-1">
-                <div className="-tracking-[2.8%] font-medium text-[16px] text-gray12 leading-none">
+                <div className="font-medium text-[16px] text-gray12 leading-none -tracking-[2.8%]">
                   {ValueFormatter.format(tier.amount)} EXP
                 </div>
-                <div className="-tracking-[2.8%] font-medium text-[9px] text-gray9 leading-none">
+                <div className="font-medium text-[9px] text-gray9 leading-none -tracking-[2.8%]">
                   per {tier.unit}
                 </div>
               </div>
@@ -1082,7 +1082,7 @@ export function Subscribe(props: {
       <Ariakit.FormSubmit
         aria-disabled={grantPermissions.isPending}
         className={cx(
-          '-tracking-[0.448px] flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal hover:bg-accentHover aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
+          'flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] bg-accent px-3 text-center font-medium text-[16px] text-white leading-normal -tracking-[0.448px] hover:bg-accentHover aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
           !grantPermissions.isPending &&
             'outline outline-dashed outline-blue9 outline-offset-2',
         )}
@@ -1282,7 +1282,7 @@ function Swap(props: {
           </Ariakit.VisuallyHidden>
 
           <Ariakit.FormInput
-            className="-tracking-[0.42px] h-10.5 w-full rounded-[10px] border border-gray5 bg-gray1 py-3 ps-3 pe-[76px] font-medium text-[15px] text-gray12 placeholder:text-gray8"
+            className="h-10.5 w-full rounded-[10px] border border-gray5 bg-gray1 py-3 ps-3 pe-[76px] font-medium text-[15px] text-gray12 -tracking-[0.42px] placeholder:text-gray8"
             disabled={!address || noFunds || isPending || isConfirming}
             max={from.balance ? Value.formatEther(from.balance) : 0}
             min="0"
@@ -1302,7 +1302,7 @@ function Swap(props: {
           />
           <div className="absolute end-4 flex items-center gap-1">
             <div className="size-4">{from.icon}</div>
-            <span className="-tracking-[0.25px] font-medium text-[13px] text-gray9 uppercase tabular-nums leading-none">
+            <span className="font-medium text-[13px] text-gray9 uppercase tabular-nums leading-none -tracking-[0.25px]">
               {from.symbol}
             </span>
           </div>
@@ -1316,7 +1316,7 @@ function Swap(props: {
           </Ariakit.VisuallyHidden>
 
           <Ariakit.FormInput
-            className="-tracking-[0.42px] h-10.5 w-full rounded-[10px] border border-gray5 bg-gray1 py-3 ps-4 pe-[76px] font-medium text-[15px] text-gray12 placeholder:text-gray8"
+            className="h-10.5 w-full rounded-[10px] border border-gray5 bg-gray1 py-3 ps-4 pe-[76px] font-medium text-[15px] text-gray12 -tracking-[0.42px] placeholder:text-gray8"
             disabled={!address || noFunds || isPending || isConfirming}
             min="0"
             name={form.names.toValue}
@@ -1335,7 +1335,7 @@ function Swap(props: {
           />
           <div className="absolute end-3 flex items-center gap-1">
             <div className="size-4">{to.icon}</div>
-            <span className="-tracking-[0.25px] font-medium text-[13px] text-gray9 uppercase tabular-nums leading-none">
+            <span className="font-medium text-[13px] text-gray9 uppercase tabular-nums leading-none -tracking-[0.25px]">
               {to.symbol}
             </span>
           </div>
@@ -1378,7 +1378,7 @@ function Swap(props: {
       <Ariakit.FormSubmit
         aria-disabled={isPending || isConfirming}
         className={cx(
-          '-tracking-[0.448px] flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] px-3 text-center font-medium text-[16px] leading-normal aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
+          'flex h-10.5 w-full items-center justify-center gap-1.5 rounded-[10px] px-3 text-center font-medium text-[16px] leading-normal -tracking-[0.448px] aria-disabled:pointer-events-none aria-disabled:bg-gray5 aria-disabled:text-gray10',
           isConfirmed ? 'bg-green3 text-green10' : 'bg-accent text-white',
           !(isPending || isConfirming || isConfirmed) &&
             'outline outline-dashed outline-blue9 outline-offset-2',
@@ -1392,7 +1392,7 @@ function Swap(props: {
             : 'Swap'}
       </Ariakit.FormSubmit>
 
-      <div className="-tracking-[0.25px] mt-3 flex h-[18.5px] items-center justify-between font-medium text-[13px]">
+      <div className="mt-3 flex h-[18.5px] items-center justify-between font-medium text-[13px] -tracking-[0.25px]">
         <div className="text-gray9">Balance</div>
         <div className="flex items-center gap-2 text-gray10">
           <div>

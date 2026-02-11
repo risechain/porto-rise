@@ -1,9 +1,8 @@
-import { spawnSync } from 'node:child_process'
+import { spawn, spawnSync } from 'node:child_process'
 import { rmSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { setTimeout } from 'node:timers/promises'
-import { defineInstance, toArgs } from 'prool'
-import { execa } from 'prool/processes'
+import { Instance } from 'prool'
 import YAML from 'yaml'
 
 type RelayParameters = {
@@ -41,7 +40,7 @@ export const poolId =
 
 let pulled = false
 
-export const relay = defineInstance((parameters?: RelayParameters) => {
+export const relay = Instance.define((parameters?: RelayParameters) => {
   const args = (parameters || {}) as RelayParameters
   const {
     containerName = crypto.randomUUID(),
@@ -56,12 +55,12 @@ export const relay = defineInstance((parameters?: RelayParameters) => {
 
   const host = 'localhost'
   const name = 'relay'
-  const process_ = execa({ name })
 
   let port = args.http?.port ?? 9119
+  let childProcess: ReturnType<typeof spawn> | undefined
 
-  function stop() {
-    rmSync(configPath)
+  function cleanup() {
+    rmSync(configPath, { force: true })
     spawnSync('docker', ['rm', '-f', containerName])
   }
 
@@ -71,13 +70,13 @@ export const relay = defineInstance((parameters?: RelayParameters) => {
     _internal: {
       args,
       get process() {
-        return process_._internal.process
+        return childProcess
       },
     },
     host,
     name,
     port,
-    async start({ port: port_ = port }, options) {
+    async start({ port: port_ = port }, { emitter }) {
       port = port_
 
       if (!pulled) {
@@ -108,7 +107,8 @@ export const relay = defineInstance((parameters?: RelayParameters) => {
       })
       writeFileSync(configPath, content)
 
-      const args_ = [
+      const dockerArgs = [
+        'run',
         '--name',
         containerName,
         '--network',
@@ -138,30 +138,75 @@ export const relay = defineInstance((parameters?: RelayParameters) => {
       ]
 
       const debug = process.env.VITE_RPC_DEBUG === 'true'
-      return await process_.start(($) => $`docker run ${args_}`, {
-        ...options,
-        resolver({ process, resolve, reject }) {
-          // TODO: remove once relay has feedback on startup.
-          setTimeout(3_000).then(resolve)
-          process.stdout.on('data', (data) => {
-            const message = data.toString()
-            if (debug) console.log(message)
-            if (message.includes('Started relay service')) resolve()
-          })
-          process.stderr.on('data', async (data) => {
-            const message = data.toString()
-            if (debug) console.log(message)
-            if (message.includes('WARNING')) return
-            reject(data)
-          })
-        },
+
+      return await new Promise<void>((resolve, reject) => {
+        childProcess = spawn('docker', dockerArgs, { stdio: 'pipe' })
+
+        // TODO: remove once relay has feedback on startup.
+        setTimeout(3_000).then(() => {
+          emitter.emit('listening')
+          resolve()
+        })
+
+        childProcess.stdout?.on('data', (data: Buffer) => {
+          const message = data.toString()
+          emitter.emit('message', message)
+          emitter.emit('stdout', message)
+          if (debug) console.log(message)
+          if (message.includes('Started relay service')) {
+            emitter.emit('listening')
+            resolve()
+          }
+        })
+        childProcess.stderr?.on('data', (data: Buffer) => {
+          const message = data.toString()
+          emitter.emit('message', message)
+          emitter.emit('stderr', message)
+          if (debug) console.log(message)
+          if (message.includes('WARNING')) return
+          reject(new Error(`Failed to start relay: ${message}`))
+        })
+        childProcess.on('exit', (code, signal) => {
+          emitter.emit('exit', code, signal)
+        })
       })
     },
     async stop() {
-      return stop()
+      if (childProcess) {
+        childProcess.kill()
+        childProcess = undefined
+      }
+      cleanup()
     },
   }
 })
+
+/** Converts an object of options to an array of CLI arguments. */
+function toArgs(obj: Record<string, unknown>): string[] {
+  return Object.entries(obj).flatMap(([key, value]) => {
+    if (value === undefined) return []
+
+    const flag = `--${key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}`
+
+    if (Array.isArray(value)) return [flag, value.join(',')]
+
+    if (typeof value === 'object' && value !== null) {
+      return Object.entries(value).flatMap(([subKey, subValue]) => {
+        if (subValue === undefined) return []
+        const subFlag = `--${key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}.${subKey.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}`
+        return toArgs({ [subFlag.slice(2)]: subValue })
+      })
+    }
+
+    if (value === false) return [flag, 'false']
+    if (value === true) return [flag]
+
+    const stringified = value?.toString() ?? ''
+    if (stringified === '') return [flag]
+
+    return [flag, stringified]
+  })
+}
 
 function createRelayConfig(opts: {
   delegationProxy: string

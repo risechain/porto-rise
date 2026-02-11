@@ -766,16 +766,16 @@ describe('feeToken', () => {
           ] as const,
         },
       },
-    ])(
-      'behavior: encodes feeToken data correctly for $case',
-      ({ input, expected }) => {
-        const encoded = z.encode(
-          Capabilities.feeToken.GetCapabilitiesResponse,
-          input,
-        )
-        expect(encoded).toEqual(expected)
-      },
-    )
+    ])('behavior: encodes feeToken data correctly for $case', ({
+      input,
+      expected,
+    }) => {
+      const encoded = z.encode(
+        Capabilities.feeToken.GetCapabilitiesResponse,
+        input,
+      )
+      expect(encoded).toEqual(expected)
+    })
 
     test('error: reject invalid token structure', () => {
       expect(
@@ -840,13 +840,13 @@ describe('feeToken', () => {
         expected: '0x0000000000000000000000000000000000000000',
         input: '0x0000000000000000000000000000000000000000',
       },
-    ])(
-      'behavior: encodes feeToken request data correctly for $case',
-      ({ input, expected }) => {
-        const encoded = z.encode(Capabilities.feeToken.Request, input)
-        expect(encoded).toBe(expected)
-      },
-    )
+    ])('behavior: encodes feeToken request data correctly for $case', ({
+      input,
+      expected,
+    }) => {
+      const encoded = z.encode(Capabilities.feeToken.Request, input)
+      expect(encoded).toBe(expected)
+    })
 
     test('error: reject invalid address format', () => {
       expect(
@@ -931,16 +931,16 @@ describe('merchant', () => {
         expected: { supported: false },
         input: { supported: false },
       },
-    ])(
-      'behavior: encodes merchant data correctly for $case',
-      ({ input, expected }) => {
-        const encoded = z.encode(
-          Capabilities.merchant.GetCapabilitiesResponse,
-          input,
-        )
-        expect(encoded).toEqual(expected)
-      },
-    )
+    ])('behavior: encodes merchant data correctly for $case', ({
+      input,
+      expected,
+    }) => {
+      const encoded = z.encode(
+        Capabilities.merchant.GetCapabilitiesResponse,
+        input,
+      )
+      expect(encoded).toEqual(expected)
+    })
 
     test('error: reject missing supported field', () => {
       expect(
@@ -998,16 +998,16 @@ describe('permissions', () => {
         expected: { supported: false },
         input: { supported: false },
       },
-    ])(
-      'behavior: encodes permissions response data correctly for $case',
-      ({ input, expected }) => {
-        const encoded = z.encode(
-          Capabilities.permissions.GetCapabilitiesResponse,
-          input,
-        )
-        expect(encoded).toEqual(expected)
-      },
-    )
+    ])('behavior: encodes permissions response data correctly for $case', ({
+      input,
+      expected,
+    }) => {
+      const encoded = z.encode(
+        Capabilities.permissions.GetCapabilitiesResponse,
+        input,
+      )
+      expect(encoded).toEqual(expected)
+    })
 
     test('error: reject invalid type', () => {
       expect(
@@ -1072,13 +1072,13 @@ describe('permissions', () => {
         expected: { id: '0xdeadbeef' },
         input: { id: '0xdeadbeef' },
       },
-    ] as const)(
-      'behavior: encodes permissions request data correctly for $case',
-      ({ input, expected }) => {
-        const encoded = z.encode(Capabilities.permissions.Request, input)
-        expect(encoded).toEqual(expected)
-      },
-    )
+    ] as const)('behavior: encodes permissions request data correctly for $case', ({
+      input,
+      expected,
+    }) => {
+      const encoded = z.encode(Capabilities.permissions.Request, input)
+      expect(encoded).toEqual(expected)
+    })
 
     test('error: reject invalid id format', () => {
       expect(
@@ -1236,13 +1236,13 @@ describe('preCalls', () => {
           { context: null, signature: '0xdef' },
         ],
       },
-    ] as const)(
-      'behavior: encodes preCalls data correctly for $case',
-      ({ input, expected }) => {
-        const encoded = z.encode(Capabilities.preCalls.Request, input)
-        expect(encoded).toEqual(expected)
-      },
-    )
+    ] as const)('behavior: encodes preCalls data correctly for $case', ({
+      input,
+      expected,
+    }) => {
+      const encoded = z.encode(Capabilities.preCalls.Request, input)
+      expect(encoded).toEqual(expected)
+    })
 
     test('error: reject invalid signature format', () => {
       expect(
@@ -1309,13 +1309,13 @@ describe('merchantUrl', () => {
         expected: 'wss://eth-mainnet.alchemyapi.io/v2/demo',
         input: 'wss://eth-mainnet.alchemyapi.io/v2/demo',
       },
-    ])(
-      'behavior: encodes merchantUrl data correctly for $case',
-      ({ input, expected }) => {
-        const encoded = z.encode(Capabilities.merchantUrl.Request, input)
-        expect(encoded).toBe(expected)
-      },
-    )
+    ])('behavior: encodes merchantUrl data correctly for $case', ({
+      input,
+      expected,
+    }) => {
+      const encoded = z.encode(Capabilities.merchantUrl.Request, input)
+      expect(encoded).toBe(expected)
+    })
 
     test('error: reject non-string', () => {
       expect(

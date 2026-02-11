@@ -1,4 +1,4 @@
-import { anvil } from 'prool/instances'
+import { Instance } from 'prool'
 import { writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { createTestClient, http } from 'viem'
@@ -27,7 +27,7 @@ import * as Simulator from '../src/core/internal/_generated/contracts/Simulator.
 const port = 8595
 const rpcUrl = `http://127.0.0.1:${port}`
 
-const stop = await anvil({
+const stop = await Instance.anvil({
   accounts: Anvil.accounts.length,
   port,
   dumpState: resolve(import.meta.dirname, '../test/src/_generated/anvil.json'),

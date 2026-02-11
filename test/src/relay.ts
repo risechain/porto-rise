@@ -1,5 +1,5 @@
 import { RpcTransport } from 'ox'
-import { createServer } from 'prool'
+import { Server } from 'prool'
 
 import * as Chains from '../../src/core/Chains.js'
 import {
@@ -85,7 +85,7 @@ function defineRelay(parameters: {
     },
     rpcUrl,
     async start() {
-      return await createServer({
+      return await Server.create({
         instance: (key) =>
           relay({
             ...rest,
@@ -93,7 +93,7 @@ function defineRelay(parameters: {
             http: {
               port,
             },
-            version: 'v26.0.2',
+            version: 'v26.1.3',
           }),
         port,
       }).start()

@@ -33,7 +33,7 @@ export namespace Input {
           true: 'pointer-events-none opacity-50',
         },
         size: {
-          default: '-tracking-[2.8%] h-10 px-3 text-[15px]',
+          default: 'h-10 px-3 text-[15px] -tracking-[2.8%]',
         },
         variant: {
           default:

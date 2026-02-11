@@ -1,5 +1,6 @@
 import { Env, Theme } from '@porto/apps'
 import * as Sentry from '@sentry/react'
+import type { Config as WagmiConfig } from '@wagmi/core'
 import { Address } from 'ox'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -32,7 +33,7 @@ if (import.meta.env.PROD) {
 }
 
 const offInitialized = Events.onInitialized(porto, async (payload, event) => {
-  const { chainIds, mode, referrer, theme } = payload
+  const { chainIds, features, labels, mode, referrer, theme } = payload
 
   // Prevent showing stale route from a previous action.
   const pathname = Router.router.state.location.pathname.replace(/\/+$/, '')
@@ -73,6 +74,9 @@ const offInitialized = Events.onInitialized(porto, async (payload, event) => {
     ...(theme
       ? { customTheme: Theme.parseJsonTheme(JSON.stringify(theme)) }
       : {}),
+    // Same pattern for optional features and labels
+    ...(features ? { customFeatures: features } : {}),
+    ...(labels ? { customLabels: labels } : {}),
   })
 })
 
@@ -80,6 +84,7 @@ const offDialogRequest = Events.onDialogRequest(
   porto,
   async ({ account, request }) => {
     const connectedAccount = porto._internal.store.getState().accounts[0]
+
     const requireAccountSync =
       account &&
       connectedAccount?.address &&
@@ -92,7 +97,7 @@ const offDialogRequest = Events.onDialogRequest(
       await Router.router.navigate({
         to: '/dialog/pending',
       })
-      await Actions.connect(Wagmi.config, {
+      await Actions.connect(Wagmi.config as WagmiConfig, {
         connector: getConnectors(Wagmi.config)[0]!,
         force: true,
         selectAccount: account,
@@ -146,10 +151,14 @@ porto.messenger.on('__internal', (payload) => {
           },
     )
 
-  if (payload.type === 'set-theme' && payload.theme)
-    Dialog.store.setState({
-      customTheme: Theme.parseJsonTheme(JSON.stringify(payload.theme)),
-    })
+  if (payload.type === 'set-theme') {
+    const updates: Partial<Dialog.store.State> = {}
+    if (payload.theme)
+      updates.customTheme = Theme.parseJsonTheme(JSON.stringify(payload.theme))
+    if (payload.features) updates.customFeatures = payload.features
+    if (payload.labels) updates.customLabels = payload.labels
+    if (Object.keys(updates).length > 0) Dialog.store.setState(updates)
+  }
 
   // backward compatibility from 0.2.7 (to be removed in a future version)
   if (payload.type === 'dialog-lifecycle' && payload.action === 'request:close')

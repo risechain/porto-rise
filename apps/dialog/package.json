@@ -10,6 +10,7 @@
     "check": "biome check --write --unsafe",
     "check:css": "tsx scripts/check-css.ts",
     "check:types": "tsc --noEmit",
+    "check:types_fast": "tsgo --noEmit",
     "prepreview": "pnpm build",
     "preview": "vite preview",
     "sync:ui-assets": "rm -rf public/ui && cp -r ../ui/assets public/ui",
@@ -27,17 +28,17 @@
     "@tanstack/react-router": "catalog:",
     "@wagmi/core": "catalog:",
     "cva": "catalog:",
-    "lucide-react": "^0.556.0",
+    "lucide-react": "^0.563.0",
+    "mipd": "catalog:",
+    "mipd-postmessage": "catalog:",
     "ox": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-intersection-observer": "^9.16.0",
+    "react-intersection-observer": "^10.0.2",
     "rise-wallet": "workspace:*",
     "wagmi": "catalog:",
     "zod": "catalog:",
-    "zustand": "catalog:",
-    "mipd": "catalog:",
-    "mipd-postmessage": "catalog:"
+    "zustand": "catalog:"
   },
   "devDependencies": {
     "@iconify/json": "catalog:",
@@ -60,8 +61,8 @@
     "unplugin-icons": "catalog:",
     "vite": "catalog:",
     "vite-plugin-mkcert": "catalog:",
-    "vite-plugin-terminal": "^1.3.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-plugin-terminal": "^1.4.0",
+    "vite-tsconfig-paths": "^6.1.0"
   },
   "repository": {
     "type": "git",

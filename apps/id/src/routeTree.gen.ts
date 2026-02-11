@@ -8,186 +8,238 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as PlaygroundRouteImport } from './routes/playground'
+import { Route as LayoutRouteImport } from './routes/_layout'
+import { Route as LayoutIndexRouteImport } from './routes/_layout.index'
+import { Route as LayoutTransactionsRouteImport } from './routes/_layout.transactions'
+import { Route as LayoutSessionsRouteImport } from './routes/_layout.sessions'
+import { Route as LayoutRecoveryV1RouteImport } from './routes/_layout.recovery-v1'
+import { Route as LayoutRecoveryRouteImport } from './routes/_layout.recovery'
+import { Route as LayoutPortfolioRouteImport } from './routes/_layout.portfolio'
+import { Route as LayoutAssetsRouteImport } from './routes/_layout.assets'
+import { Route as LayoutAboutRouteImport } from './routes/_layout.about'
+import { Route as LayoutEmailVerifyRouteImport } from './routes/_layout.email.verify'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as PlaygroundImport } from './routes/playground'
-import { Route as LayoutV1Import } from './routes/_layoutV1'
-import { Route as LayoutImport } from './routes/_layout'
-import { Route as LayoutIndexImport } from './routes/_layout.index'
-import { Route as LayoutTransactionsImport } from './routes/_layout.transactions'
-import { Route as LayoutSessionsImport } from './routes/_layout.sessions'
-import { Route as LayoutRecoveryV1Import } from './routes/_layout.recovery-v1'
-import { Route as LayoutRecoveryImport } from './routes/_layout.recovery'
-import { Route as LayoutPortfolioImport } from './routes/_layout.portfolio'
-import { Route as LayoutAssetsImport } from './routes/_layout.assets'
-import { Route as LayoutAboutImport } from './routes/_layout.about'
-import { Route as LayoutEmailVerifyImport } from './routes/_layout.email.verify'
-
-// Create/Update Routes
-
-const PlaygroundRoute = PlaygroundImport.update({
+const PlaygroundRoute = PlaygroundRouteImport.update({
   id: '/playground',
   path: '/playground',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const LayoutV1Route = LayoutV1Import.update({
-  id: '/_layoutV1',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LayoutRoute = LayoutImport.update({
+const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const LayoutIndexRoute = LayoutIndexImport.update({
+const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutTransactionsRoute = LayoutTransactionsImport.update({
+const LayoutTransactionsRoute = LayoutTransactionsRouteImport.update({
   id: '/transactions',
   path: '/transactions',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutSessionsRoute = LayoutSessionsImport.update({
+const LayoutSessionsRoute = LayoutSessionsRouteImport.update({
   id: '/sessions',
   path: '/sessions',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutRecoveryV1Route = LayoutRecoveryV1Import.update({
+const LayoutRecoveryV1Route = LayoutRecoveryV1RouteImport.update({
   id: '/recovery-v1',
   path: '/recovery-v1',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutRecoveryRoute = LayoutRecoveryImport.update({
+const LayoutRecoveryRoute = LayoutRecoveryRouteImport.update({
   id: '/recovery',
   path: '/recovery',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutPortfolioRoute = LayoutPortfolioImport.update({
+const LayoutPortfolioRoute = LayoutPortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutAssetsRoute = LayoutAssetsImport.update({
+const LayoutAssetsRoute = LayoutAssetsRouteImport.update({
   id: '/assets',
   path: '/assets',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutAboutRoute = LayoutAboutImport.update({
+const LayoutAboutRoute = LayoutAboutRouteImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => LayoutRoute,
 } as any)
-
-const LayoutEmailVerifyRoute = LayoutEmailVerifyImport.update({
+const LayoutEmailVerifyRoute = LayoutEmailVerifyRouteImport.update({
   id: '/email/verify',
   path: '/email/verify',
   getParentRoute: () => LayoutRoute,
 } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof LayoutIndexRoute
+  '/playground': typeof PlaygroundRoute
+  '/about': typeof LayoutAboutRoute
+  '/assets': typeof LayoutAssetsRoute
+  '/portfolio': typeof LayoutPortfolioRoute
+  '/recovery': typeof LayoutRecoveryRoute
+  '/recovery-v1': typeof LayoutRecoveryV1Route
+  '/sessions': typeof LayoutSessionsRoute
+  '/transactions': typeof LayoutTransactionsRoute
+  '/email/verify': typeof LayoutEmailVerifyRoute
+}
+export interface FileRoutesByTo {
+  '/playground': typeof PlaygroundRoute
+  '/about': typeof LayoutAboutRoute
+  '/assets': typeof LayoutAssetsRoute
+  '/portfolio': typeof LayoutPortfolioRoute
+  '/recovery': typeof LayoutRecoveryRoute
+  '/recovery-v1': typeof LayoutRecoveryV1Route
+  '/sessions': typeof LayoutSessionsRoute
+  '/transactions': typeof LayoutTransactionsRoute
+  '/': typeof LayoutIndexRoute
+  '/email/verify': typeof LayoutEmailVerifyRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/_layout': typeof LayoutRouteWithChildren
+  '/playground': typeof PlaygroundRoute
+  '/_layout/about': typeof LayoutAboutRoute
+  '/_layout/assets': typeof LayoutAssetsRoute
+  '/_layout/portfolio': typeof LayoutPortfolioRoute
+  '/_layout/recovery': typeof LayoutRecoveryRoute
+  '/_layout/recovery-v1': typeof LayoutRecoveryV1Route
+  '/_layout/sessions': typeof LayoutSessionsRoute
+  '/_layout/transactions': typeof LayoutTransactionsRoute
+  '/_layout/': typeof LayoutIndexRoute
+  '/_layout/email/verify': typeof LayoutEmailVerifyRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/playground'
+    | '/about'
+    | '/assets'
+    | '/portfolio'
+    | '/recovery'
+    | '/recovery-v1'
+    | '/sessions'
+    | '/transactions'
+    | '/email/verify'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/playground'
+    | '/about'
+    | '/assets'
+    | '/portfolio'
+    | '/recovery'
+    | '/recovery-v1'
+    | '/sessions'
+    | '/transactions'
+    | '/'
+    | '/email/verify'
+  id:
+    | '__root__'
+    | '/_layout'
+    | '/playground'
+    | '/_layout/about'
+    | '/_layout/assets'
+    | '/_layout/portfolio'
+    | '/_layout/recovery'
+    | '/_layout/recovery-v1'
+    | '/_layout/sessions'
+    | '/_layout/transactions'
+    | '/_layout/'
+    | '/_layout/email/verify'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  LayoutRoute: typeof LayoutRouteWithChildren
+  PlaygroundRoute: typeof PlaygroundRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_layout': {
-      id: '/_layout'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof LayoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layoutV1': {
-      id: '/_layoutV1'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof LayoutV1Import
-      parentRoute: typeof rootRoute
-    }
     '/playground': {
       id: '/playground'
       path: '/playground'
       fullPath: '/playground'
-      preLoaderRoute: typeof PlaygroundImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof PlaygroundRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_layout/about': {
-      id: '/_layout/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof LayoutAboutImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/assets': {
-      id: '/_layout/assets'
-      path: '/assets'
-      fullPath: '/assets'
-      preLoaderRoute: typeof LayoutAssetsImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/portfolio': {
-      id: '/_layout/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof LayoutPortfolioImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/recovery': {
-      id: '/_layout/recovery'
-      path: '/recovery'
-      fullPath: '/recovery'
-      preLoaderRoute: typeof LayoutRecoveryImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/recovery-v1': {
-      id: '/_layout/recovery-v1'
-      path: '/recovery-v1'
-      fullPath: '/recovery-v1'
-      preLoaderRoute: typeof LayoutRecoveryV1Import
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/sessions': {
-      id: '/_layout/sessions'
-      path: '/sessions'
-      fullPath: '/sessions'
-      preLoaderRoute: typeof LayoutSessionsImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/transactions': {
-      id: '/_layout/transactions'
-      path: '/transactions'
-      fullPath: '/transactions'
-      preLoaderRoute: typeof LayoutTransactionsImport
-      parentRoute: typeof LayoutImport
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_layout/': {
       id: '/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexImport
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof LayoutIndexRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/transactions': {
+      id: '/_layout/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof LayoutTransactionsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/sessions': {
+      id: '/_layout/sessions'
+      path: '/sessions'
+      fullPath: '/sessions'
+      preLoaderRoute: typeof LayoutSessionsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/recovery-v1': {
+      id: '/_layout/recovery-v1'
+      path: '/recovery-v1'
+      fullPath: '/recovery-v1'
+      preLoaderRoute: typeof LayoutRecoveryV1RouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/recovery': {
+      id: '/_layout/recovery'
+      path: '/recovery'
+      fullPath: '/recovery'
+      preLoaderRoute: typeof LayoutRecoveryRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/portfolio': {
+      id: '/_layout/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof LayoutPortfolioRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/assets': {
+      id: '/_layout/assets'
+      path: '/assets'
+      fullPath: '/assets'
+      preLoaderRoute: typeof LayoutAssetsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/about': {
+      id: '/_layout/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof LayoutAboutRouteImport
+      parentRoute: typeof LayoutRoute
     }
     '/_layout/email/verify': {
       id: '/_layout/email/verify'
       path: '/email/verify'
       fullPath: '/email/verify'
-      preLoaderRoute: typeof LayoutEmailVerifyImport
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof LayoutEmailVerifyRouteImport
+      parentRoute: typeof LayoutRoute
     }
   }
 }
-
-// Create and export the route tree
 
 interface LayoutRouteChildren {
   LayoutAboutRoute: typeof LayoutAboutRoute
@@ -216,177 +268,10 @@ const LayoutRouteChildren: LayoutRouteChildren = {
 const LayoutRouteWithChildren =
   LayoutRoute._addFileChildren(LayoutRouteChildren)
 
-export interface FileRoutesByFullPath {
-  '': typeof LayoutV1Route
-  '/playground': typeof PlaygroundRoute
-  '/about': typeof LayoutAboutRoute
-  '/assets': typeof LayoutAssetsRoute
-  '/portfolio': typeof LayoutPortfolioRoute
-  '/recovery': typeof LayoutRecoveryRoute
-  '/recovery-v1': typeof LayoutRecoveryV1Route
-  '/sessions': typeof LayoutSessionsRoute
-  '/transactions': typeof LayoutTransactionsRoute
-  '/': typeof LayoutIndexRoute
-  '/email/verify': typeof LayoutEmailVerifyRoute
-}
-
-export interface FileRoutesByTo {
-  '': typeof LayoutV1Route
-  '/playground': typeof PlaygroundRoute
-  '/about': typeof LayoutAboutRoute
-  '/assets': typeof LayoutAssetsRoute
-  '/portfolio': typeof LayoutPortfolioRoute
-  '/recovery': typeof LayoutRecoveryRoute
-  '/recovery-v1': typeof LayoutRecoveryV1Route
-  '/sessions': typeof LayoutSessionsRoute
-  '/transactions': typeof LayoutTransactionsRoute
-  '/': typeof LayoutIndexRoute
-  '/email/verify': typeof LayoutEmailVerifyRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/_layout': typeof LayoutRouteWithChildren
-  '/_layoutV1': typeof LayoutV1Route
-  '/playground': typeof PlaygroundRoute
-  '/_layout/about': typeof LayoutAboutRoute
-  '/_layout/assets': typeof LayoutAssetsRoute
-  '/_layout/portfolio': typeof LayoutPortfolioRoute
-  '/_layout/recovery': typeof LayoutRecoveryRoute
-  '/_layout/recovery-v1': typeof LayoutRecoveryV1Route
-  '/_layout/sessions': typeof LayoutSessionsRoute
-  '/_layout/transactions': typeof LayoutTransactionsRoute
-  '/_layout/': typeof LayoutIndexRoute
-  '/_layout/email/verify': typeof LayoutEmailVerifyRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | ''
-    | '/playground'
-    | '/about'
-    | '/assets'
-    | '/portfolio'
-    | '/recovery'
-    | '/recovery-v1'
-    | '/sessions'
-    | '/transactions'
-    | '/'
-    | '/email/verify'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | ''
-    | '/playground'
-    | '/about'
-    | '/assets'
-    | '/portfolio'
-    | '/recovery'
-    | '/recovery-v1'
-    | '/sessions'
-    | '/transactions'
-    | '/'
-    | '/email/verify'
-  id:
-    | '__root__'
-    | '/_layout'
-    | '/_layoutV1'
-    | '/playground'
-    | '/_layout/about'
-    | '/_layout/assets'
-    | '/_layout/portfolio'
-    | '/_layout/recovery'
-    | '/_layout/recovery-v1'
-    | '/_layout/sessions'
-    | '/_layout/transactions'
-    | '/_layout/'
-    | '/_layout/email/verify'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  LayoutRoute: typeof LayoutRouteWithChildren
-  LayoutV1Route: typeof LayoutV1Route
-  PlaygroundRoute: typeof PlaygroundRoute
-}
-
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
-  LayoutV1Route: LayoutV1Route,
   PlaygroundRoute: PlaygroundRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/_layout",
-        "/_layoutV1",
-        "/playground"
-      ]
-    },
-    "/_layout": {
-      "filePath": "_layout.tsx",
-      "children": [
-        "/_layout/about",
-        "/_layout/assets",
-        "/_layout/portfolio",
-        "/_layout/recovery",
-        "/_layout/recovery-v1",
-        "/_layout/sessions",
-        "/_layout/transactions",
-        "/_layout/",
-        "/_layout/email/verify"
-      ]
-    },
-    "/_layoutV1": {
-      "filePath": "_layoutV1.tsx"
-    },
-    "/playground": {
-      "filePath": "playground.tsx"
-    },
-    "/_layout/about": {
-      "filePath": "_layout.about.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/assets": {
-      "filePath": "_layout.assets.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/portfolio": {
-      "filePath": "_layout.portfolio.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/recovery": {
-      "filePath": "_layout.recovery.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/recovery-v1": {
-      "filePath": "_layout.recovery-v1.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/sessions": {
-      "filePath": "_layout.sessions.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/transactions": {
-      "filePath": "_layout.transactions.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/": {
-      "filePath": "_layout.index.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/email/verify": {
-      "filePath": "_layout.email.verify.tsx",
-      "parent": "/_layout"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

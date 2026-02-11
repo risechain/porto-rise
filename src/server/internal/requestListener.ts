@@ -216,7 +216,7 @@ export async function sendResponse(
     }
   }
 
-  res.writeHead(response.status, headers)
+  ;(res as http.ServerResponse).writeHead(response.status, headers)
 
   if (response.body != null && res.req.method !== 'HEAD') {
     for await (const chunk of readStream(response.body)) {

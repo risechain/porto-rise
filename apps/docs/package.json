@@ -5,6 +5,7 @@
   "scripts": {
     "build": "NODE_OPTIONS=\"--max-old-space-size=8192\" vocs build --searchIndex false && vocs search-index",
     "check:types": "tsc --noEmit",
+    "check:types_fast": "tsgo --noEmit",
     "dev": "vocs dev",
     "preview": "vocs preview"
   },
@@ -15,15 +16,15 @@
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-query-persist-client": "catalog:",
     "cva": "catalog:",
-    "rise-wallet": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-router": "^7",
-    "shiki": "^1",
+    "react-router": "^7.13.0",
+    "rise-wallet": "workspace:*",
+    "shiki": "^3.22.0",
     "sonner": "catalog:",
     "tailwindcss": "catalog:",
     "viem": "catalog:",
-    "vocs": "latest",
+    "vocs": "^1.4.1",
     "wagmi": "catalog:"
   },
   "devDependencies": {

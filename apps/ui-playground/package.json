@@ -8,6 +8,7 @@
     "build": "vite build",
     "check": "biome check --write --unsafe",
     "check:types": "tsc --noEmit",
+    "check:types_fast": "tsgo --noEmit",
     "prepare": "panda codegen",
     "prepreview": "pnpm build",
     "preview": "vite preview",
@@ -36,6 +37,6 @@
     "typescript": "catalog:",
     "unplugin-icons": "catalog:",
     "vite": "catalog:",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^6.1.0"
   }
 }

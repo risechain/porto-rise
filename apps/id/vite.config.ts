@@ -66,6 +66,15 @@ export default defineConfig(({ mode }) => {
       'process.env': {},
     },
     plugins,
+    resolve: {
+      dedupe: [
+        'wagmi',
+        '@wagmi/core',
+        'react',
+        'react-dom',
+        '@tanstack/react-query',
+      ],
+    },
     server: {
       proxy: {
         '/dialog/': {

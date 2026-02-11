@@ -3,7 +3,8 @@
 
 @custom-variant dark (&:is(.scheme-light-dark *));
 
-@custom-variant hocus (&:hover, &:focus);
+@custom-variant hocus (&:hover,
+&:focus);
 
 @font-face {
   font-family: "FK Display";

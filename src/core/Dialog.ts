@@ -4,6 +4,8 @@ import type { RpcRequest, RpcResponse } from 'ox'
 import * as Json from 'ox/Json'
 import * as Provider from 'ox/Provider'
 import type { ThemeFragment } from '../theme/Theme.js'
+import * as Account from '../viem/Account.js'
+import * as Key from '../viem/Key.js'
 import * as IO from './internal/intersectionObserver.js'
 import { logger } from './internal/logger.js'
 import type { Internal } from './internal/porto.js'
@@ -33,8 +35,30 @@ export const hostUrls = {
 export type Dialog = {
   name: string
   setup: (parameters: {
+    features?:
+      | {
+          bugReporting?: boolean | undefined
+          emailInput?: boolean | undefined
+          signUpLink?: boolean | undefined
+          createAccount?: boolean | undefined
+        }
+      | undefined
     host: string
     internal: Internal
+    labels?:
+      | {
+          signInPrompt?: string | undefined
+          signIn?: string | undefined
+          signUp?: string | undefined
+          createAccount?: string | undefined
+          signInAlt?: string | undefined
+          dialogTitle?: string | undefined
+          exampleEmail?: string | undefined
+          bugReportEmail?: string | undefined
+          switchAccount?: string | undefined
+          signUpLink?: string | undefined
+        }
+      | undefined
     theme?: ThemeFragment | undefined
     themeController?: ThemeController | undefined
   }) => {
@@ -87,7 +111,8 @@ export function iframe(options: iframe.Options = {}) {
   return from({
     name: 'iframe',
     setup(parameters) {
-      const { host, internal, theme, themeController } = parameters
+      const { features, host, internal, labels, theme, themeController } =
+        parameters
       const { store } = internal
 
       const fallback = popup().setup(parameters)
@@ -199,6 +224,8 @@ export function iframe(options: iframe.Options = {}) {
 
         messenger.send('__internal', {
           chainIds: compatibleChainIds,
+          features,
+          labels,
           mode: 'iframe',
           referrer: getReferrer(),
           theme,
@@ -216,6 +243,9 @@ export function iframe(options: iframe.Options = {}) {
           iframe.src = src
         }
         handleResponse(store, response)
+      })
+      messenger.on('account', (payload) => {
+        handleAccount(store, payload)
       })
       messenger.on('__internal', (payload) => {
         if (payload.type === 'switch' && payload.mode === 'popup') {
@@ -338,6 +368,8 @@ export function iframe(options: iframe.Options = {}) {
           open = false
 
           messenger.send('__internal', {
+            features,
+            labels,
             mode: 'iframe',
             referrer: getReferrer(),
             type: 'init',
@@ -368,6 +400,8 @@ export function iframe(options: iframe.Options = {}) {
           activateDialog()
 
           messenger.send('__internal', {
+            features,
+            labels,
             mode: 'iframe',
             referrer: getReferrer(),
             type: 'init',
@@ -475,7 +509,7 @@ export function popup(options: popup.Options = {}) {
   return from({
     name: 'popup',
     setup(parameters) {
-      const { host, internal, themeController } = parameters
+      const { features, host, internal, labels, themeController } = parameters
       const { store } = internal
 
       const hostUrl = new URL(host)
@@ -543,6 +577,8 @@ export function popup(options: popup.Options = {}) {
           themeController?._setup(messenger, false)
 
           messenger.send('__internal', {
+            features,
+            labels,
             mode: resolvedType === 'page' ? 'page' : 'popup',
             referrer: getReferrer(),
             theme: themeController?.getTheme() ?? parameters.theme,
@@ -552,6 +588,9 @@ export function popup(options: popup.Options = {}) {
           messenger.on('rpc-response', (response) =>
             handleResponse(store, response),
           )
+          messenger.on('account', (payload) => {
+            handleAccount(store, payload)
+          })
 
           window.removeEventListener('focus', onBlur)
           window.addEventListener('focus', onBlur)
@@ -630,6 +669,7 @@ export function authSession(options: authSession.Options = {}) {
           wallet_connect: 'wallet_connect',
           wallet_getAccountVersion: 'wallet_getAccountVersion',
           wallet_getAssets: 'wallet_getAssets',
+          wallet_getCallsHistory: 'wallet_getCallsHistory',
           wallet_getCallsStatus: 'wallet_getCallsStatus',
           wallet_getCapabilities: 'wallet_getCapabilities',
           wallet_getKeys: 'wallet_getKeys',
@@ -856,7 +896,8 @@ export function experimental_inline(options: inline.Options) {
   return from({
     name: 'inline',
     setup(parameters) {
-      const { host, internal, theme, themeController } = parameters
+      const { features, host, internal, labels, theme, themeController } =
+        parameters
       const { store } = internal
 
       let open = false
@@ -902,6 +943,8 @@ export function experimental_inline(options: inline.Options) {
 
       messenger.on('ready', () => {
         messenger.send('__internal', {
+          features,
+          labels,
           mode: 'inline-iframe',
           referrer: getReferrer(),
           theme,
@@ -912,6 +955,9 @@ export function experimental_inline(options: inline.Options) {
       messenger.on('rpc-response', (response) =>
         handleResponse(store, response),
       )
+      messenger.on('account', (payload) => {
+        handleAccount(store, payload)
+      })
 
       return {
         close() {},
@@ -924,6 +970,8 @@ export function experimental_inline(options: inline.Options) {
           open = true
 
           messenger.send('__internal', {
+            features,
+            labels,
             mode: 'iframe',
             referrer: getReferrer(),
             type: 'init',
@@ -1082,6 +1130,22 @@ export function handleResponse(
         status: 'success',
       } satisfies QueuedRequest
     }),
+  }))
+}
+
+export function handleAccount(
+  store: Store,
+  payload: Messenger.Payload<'account'>,
+) {
+  const { account } = payload
+  store.setState((x) => ({
+    ...x,
+    accounts: [
+      Account.from({
+        address: account.address,
+        keys: account.capabilities?.admins?.map((key) => Key.from(key)) ?? [],
+      }),
+    ],
   }))
 }
 

@@ -40,6 +40,7 @@ export const hostnames = [
   'swap.defillama.com',
   'uniswap.org',
   'www.bungee.exchange',
+  // RISE chain hosts
   'wallet.risechain.com',
   'risechain.com',
   'testnet.rise.trade',

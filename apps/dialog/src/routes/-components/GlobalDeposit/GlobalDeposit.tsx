@@ -65,8 +65,8 @@ export function GlobalDeposit() {
         type: 'function',
       },
     ],
-    address: selectedToken?.bridgeWrapper!,
-    args: [selectedToken?.bridgeContract!],
+    address: selectedToken!.bridgeWrapper,
+    args: [selectedToken!.bridgeContract],
     chainId: selectedChain?.id as any,
     functionName: 'minAmounts',
     query: {

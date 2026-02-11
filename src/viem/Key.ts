@@ -1446,11 +1446,11 @@ export function serializeWebAuthnSignature(
     [
       {
         authenticatorData: metadata.authenticatorData,
-        challengeIndex: BigInt(metadata.challengeIndex),
+        challengeIndex: BigInt(metadata.challengeIndex!),
         clientDataJSON: metadata.clientDataJSON,
         r: Hex.fromNumber(signature.r, { size: 32 }),
         s: Hex.fromNumber(signature.s, { size: 32 }),
-        typeIndex: BigInt(metadata.typeIndex),
+        typeIndex: BigInt(metadata.typeIndex!),
       },
     ],
   )

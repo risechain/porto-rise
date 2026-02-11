@@ -11,6 +11,8 @@ export const store = createStore(
     persist<store.State>(
       () => ({
         accountMetadata: {},
+        customFeatures: undefined,
+        customLabels: undefined,
         customTheme: undefined,
         display: 'full',
         error: null,
@@ -37,6 +39,28 @@ export declare namespace store {
         email?: string | undefined
       }
     >
+    customFeatures:
+      | {
+          bugReporting?: boolean | undefined
+          emailInput?: boolean | undefined
+          signUpLink?: boolean | undefined
+          createAccount?: boolean | undefined
+        }
+      | undefined
+    customLabels:
+      | {
+          signInPrompt?: string | undefined
+          signIn?: string | undefined
+          signUp?: string | undefined
+          createAccount?: string | undefined
+          signInAlt?: string | undefined
+          dialogTitle?: string | undefined
+          exampleEmail?: string | undefined
+          bugReportEmail?: string | undefined
+          switchAccount?: string | undefined
+          signUpLink?: string | undefined
+        }
+      | undefined
     customTheme: Theme.TailwindCustomTheme | undefined
     // reflects how the dialog window gets displayed:
     // - 'full': uses the full space available (popup, popup-standalone) (default)
@@ -67,4 +91,26 @@ export function useStore<slice = store.State>(
   ) => state as slice,
 ) {
   return Zustand.useStore(store, useShallow(selector))
+}
+
+export function handleWebAuthnIframeError(error: unknown): boolean {
+  // Handle iframe WebAuthn limitation (e.g. Firefox + Bitwarden)
+  // See https://github.com/bitwarden/clients/issues/12590
+  if (
+    (error as any)?.message?.includes("Invalid 'sameOriginWithAncestors' value")
+  ) {
+    store.setState({
+      error: {
+        action: 'retry-in-popup',
+        message:
+          "Your browser doesn't support passkey creation in the current context.",
+        name: 'CREDENTIAL_CREATION_FAILED',
+        secondaryMessage:
+          'Please try again in a popup window for better compatibility.',
+        title: 'Passkey creation not supported',
+      },
+    })
+    return true
+  }
+  return false
 }

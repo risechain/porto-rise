@@ -111,29 +111,28 @@ describe('Permissions', () => {
     { case: 'p256', keyType: 'p256' as const },
     { case: 'secp256k1', keyType: 'secp256k1' as const },
     { case: 'webauthn-p256', keyType: 'webauthn-p256' as const },
-  ])(
-    'behavior: parses valid permissions with key type $case',
-    ({ keyType }) => {
-      const result = z.parse(Permissions.Permissions, {
-        address: '0x1234567890123456789012345678901234567890',
-        expiry: 1000,
-        id: '0xabc123',
-        key: {
-          publicKey: '0xdeadbeef',
-          type: keyType,
-        },
-        permissions: {
-          calls: [
-            {
-              signature: 'transfer(address,uint256)',
-              to: '0x1234567890123456789012345678901234567890',
-            },
-          ],
-        },
-      })
-      expect(result.key.type).toBe(keyType)
-    },
-  )
+  ])('behavior: parses valid permissions with key type $case', ({
+    keyType,
+  }) => {
+    const result = z.parse(Permissions.Permissions, {
+      address: '0x1234567890123456789012345678901234567890',
+      expiry: 1000,
+      id: '0xabc123',
+      key: {
+        publicKey: '0xdeadbeef',
+        type: keyType,
+      },
+      permissions: {
+        calls: [
+          {
+            signature: 'transfer(address,uint256)',
+            to: '0x1234567890123456789012345678901234567890',
+          },
+        ],
+      },
+    })
+    expect(result.key.type).toBe(keyType)
+  })
 
   test('behavior: parses valid permissions with different call permission types', () => {
     const result = z.parse(Permissions.Permissions, {
@@ -309,30 +308,30 @@ describe('Permissions', () => {
     { chainId: 137, expected: '0x89' },
     { chainId: 42161, expected: '0xa4b1' },
     { chainId: 0, expected: '0x0' },
-  ])(
-    'behavior: encodes chainId $chainId to $expected',
-    ({ chainId, expected }) => {
-      const result = z.encode(Permissions.Permissions, {
-        address: '0x1234567890123456789012345678901234567890',
-        chainId,
-        expiry: 1000,
-        id: '0xabc123',
-        key: {
-          publicKey: '0xdeadbeef',
-          type: 'secp256k1',
-        },
-        permissions: {
-          calls: [
-            {
-              signature: 'transfer(address,uint256)',
-              to: '0x1234567890123456789012345678901234567890',
-            },
-          ],
-        },
-      })
-      expect(result.chainId).toBe(expected)
-    },
-  )
+  ])('behavior: encodes chainId $chainId to $expected', ({
+    chainId,
+    expected,
+  }) => {
+    const result = z.encode(Permissions.Permissions, {
+      address: '0x1234567890123456789012345678901234567890',
+      chainId,
+      expiry: 1000,
+      id: '0xabc123',
+      key: {
+        publicKey: '0xdeadbeef',
+        type: 'secp256k1',
+      },
+      permissions: {
+        calls: [
+          {
+            signature: 'transfer(address,uint256)',
+            to: '0x1234567890123456789012345678901234567890',
+          },
+        ],
+      },
+    })
+    expect(result.chainId).toBe(expected)
+  })
 
   test('error: rejects invalid address format', () => {
     expect(
@@ -729,33 +728,33 @@ describe('Request', () => {
     { expected: '0xff', limit: 255n },
     { expected: '0x3e8', limit: 1000n },
     { expected: '0x0', limit: 0n },
-  ])(
-    'behavior: encodes spend limit $limit to $expected',
-    ({ limit, expected }) => {
-      const result = z.encode(Permissions.Request, {
-        expiry: 1000,
-        feeToken: {
-          limit: '1',
-          symbol: 'USDC',
-        },
-        permissions: {
-          calls: [
-            {
-              signature: 'transfer(address,uint256)',
-              to: '0x1234567890123456789012345678901234567890',
-            },
-          ],
-          spend: [
-            {
-              limit,
-              period: 'day',
-            },
-          ],
-        },
-      })
-      expect(result.permissions.spend?.[0]?.limit).toBe(expected)
-    },
-  )
+  ])('behavior: encodes spend limit $limit to $expected', ({
+    limit,
+    expected,
+  }) => {
+    const result = z.encode(Permissions.Request, {
+      expiry: 1000,
+      feeToken: {
+        limit: '1',
+        symbol: 'USDC',
+      },
+      permissions: {
+        calls: [
+          {
+            signature: 'transfer(address,uint256)',
+            to: '0x1234567890123456789012345678901234567890',
+          },
+        ],
+        spend: [
+          {
+            limit,
+            period: 'day',
+          },
+        ],
+      },
+    })
+    expect(result.permissions.spend?.[0]?.limit).toBe(expected)
+  })
 
   test('error: rejects invalid expiry (zero)', () => {
     expect(

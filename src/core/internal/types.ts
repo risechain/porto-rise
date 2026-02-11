@@ -62,11 +62,12 @@ export type FixedArray<
  * //   ^? true
  * ```
  */
-export type IsNarrowable<T, U> = IsNever<
-  (T extends U ? true : false) & (U extends T ? false : true)
-> extends true
-  ? false
-  : true
+export type IsNarrowable<T, U> =
+  IsNever<
+    (T extends U ? true : false) & (U extends T ? false : true)
+  > extends true
+    ? false
+    : true
 
 /**
  * Checks if `T` is `never`
@@ -287,11 +288,12 @@ export type UnionToTuple<
 > = [union] extends [never] ? [] : [...UnionToTuple<Exclude<union, last>>, last]
 
 /** @internal */
-export type LastInUnion<U> = UnionToIntersection<
-  U extends unknown ? (x: U) => 0 : never
-> extends (x: infer l) => 0
-  ? l
-  : never
+export type LastInUnion<U> =
+  UnionToIntersection<U extends unknown ? (x: U) => 0 : never> extends (
+    x: infer l,
+  ) => 0
+    ? l
+    : never
 
 /** @internal */
 export type UnionToIntersection<union> = (

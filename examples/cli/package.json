@@ -6,8 +6,8 @@
   },
   "dependencies": {
     "porto": "latest",
-    "typescript": "~5.9.3",
-    "viem": "latest"
+    "typescript": "catalog:",
+    "viem": "catalog:"
   },
   "engines": {
     "node": ">=22.18"

@@ -197,17 +197,16 @@ describe('SpendPermission', () => {
     { period: 'week' },
     { period: 'month' },
     { period: 'year' },
-  ])(
-    'behavior: parses valid spend permission with period $period',
-    ({ period }) => {
-      const result = z.parse(Permission.SpendPermission, {
-        limit: '0x64',
-        period,
-        type: 'spend',
-      })
-      expect(result.period).toBe(period)
-    },
-  )
+  ])('behavior: parses valid spend permission with period $period', ({
+    period,
+  }) => {
+    const result = z.parse(Permission.SpendPermission, {
+      limit: '0x64',
+      period,
+      type: 'spend',
+    })
+    expect(result.period).toBe(period)
+  })
 
   test('behavior: encodes spend permission with BigInt limit', () => {
     const result = z.encode(Permission.SpendPermission, {
@@ -263,17 +262,17 @@ describe('SpendPermission', () => {
     { expected: '0xff', limit: 255n },
     { expected: '0x3e8', limit: 1000n },
     { expected: '0x0', limit: 0n },
-  ])(
-    'behavior: encodes spend limit $limit to $expected',
-    ({ limit, expected }) => {
-      const result = z.encode(Permission.SpendPermission, {
-        limit,
-        period: 'day',
-        type: 'spend',
-      })
-      expect(result.limit).toBe(expected)
-    },
-  )
+  ])('behavior: encodes spend limit $limit to $expected', ({
+    limit,
+    expected,
+  }) => {
+    const result = z.encode(Permission.SpendPermission, {
+      limit,
+      period: 'day',
+      type: 'spend',
+    })
+    expect(result.limit).toBe(expected)
+  })
 
   test('param: rejects missing limit', () => {
     expect(

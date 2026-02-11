@@ -7,12 +7,20 @@ import * as React from 'react'
 import type * as Quote_schema from 'rise-wallet/core/internal/relay/schema/quotes'
 import { useWatchBlockNumber } from 'wagmi'
 import { DepositButtons } from '~/components/DepositButtons'
+import type { GuestStatus } from '~/lib/guestMode'
 import type { CbPostMessageSchema } from '~/lib/onramp'
 import { porto } from '~/lib/Porto'
 import { ValueFormatter } from '~/utils'
 import LucideInfo from '~icons/lucide/info'
 import { AddFunds } from './AddFunds'
+import { GuestCheckoutSection } from './GuestCheckoutSection'
 import { Layout } from './Layout'
+
+export type GuestMode = {
+  status: GuestStatus
+  onSignIn: () => void
+  onSignUp: (email?: string) => void
+}
 
 export function ActionPreview(props: ActionPreview.Props) {
   const {
@@ -25,6 +33,7 @@ export function ActionPreview(props: ActionPreview.Props) {
     account,
     onReject,
     onQuotesRefetch,
+    guestMode,
   } = props
 
   const deficit = useDeficit(quotes, error, queryParams)
@@ -70,6 +79,12 @@ export function ActionPreview(props: ActionPreview.Props) {
             onAddFunds={() => setShowAddFunds(true)}
             onReject={onReject}
           />
+        ) : guestMode && guestMode.status !== 'disabled' ? (
+          <GuestCheckoutSection
+            guestStatus={guestMode.status}
+            onGuestSignIn={guestMode.onSignIn}
+            onGuestSignUp={guestMode.onSignUp}
+          />
         ) : (
           actions
         )}
@@ -94,6 +109,7 @@ export namespace ActionPreview {
     account?: Address.Address
     onReject: () => void
     onQuotesRefetch?: () => void
+    guestMode?: GuestMode
   }
 
   export type Quote = {

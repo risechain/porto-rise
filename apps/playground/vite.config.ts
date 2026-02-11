@@ -3,7 +3,7 @@ import { rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
-import { anvil } from 'prool/instances'
+import { Instance, Server } from 'prool'
 import { createClient, http, parseEther } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { writeContract } from 'viem/actions'
@@ -94,14 +94,16 @@ export default defineConfig(({ mode }) => {
 
           logger.info('Starting Anvil...')
 
-          await anvil({
-            hardfork: 'osaka' as never,
-            host: process.env.CI ? '0.0.0.0' : undefined,
-            loadState: resolve(
-              import.meta.dirname,
-              '../../test/src/_generated/anvil.json',
-            ),
-            port: anvilConfig.port,
+          await Server.create({
+            instance: Instance.anvil({
+              hardfork: 'osaka' as never,
+              host: process.env.CI ? '0.0.0.0' : undefined,
+              loadState: resolve(
+                import.meta.dirname,
+                '../../test/src/_generated/anvil.json',
+              ),
+              port: anvilConfig.port,
+            }),
           }).start()
 
           logger.info('Anvil started on ' + anvilConfig.rpcUrl)
@@ -138,7 +140,7 @@ export default defineConfig(({ mode }) => {
               orchestrator: orchestratorAddress,
               simulator: simulatorAddress,
               txGasBuffer: 100_000n,
-              version: 'v26.0.2',
+              version: 'v26.1.3',
             }).start()
             await fetch(relayConfig.rpcUrl + '/start')
             return stop
