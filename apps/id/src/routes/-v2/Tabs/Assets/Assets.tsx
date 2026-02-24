@@ -54,6 +54,8 @@ export function Assets() {
   })
 
   const wallet = assetsToWalletBalances(assets.data ?? [], new Map())
+  console.log("wallet:: ", wallet)
+  console.log("capabilities:: ", capabilities.data)
 
   return (
     <div className="space-y-3">

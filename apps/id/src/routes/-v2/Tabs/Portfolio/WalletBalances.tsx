@@ -76,7 +76,9 @@ export function WalletBalances(props: Readonly<WalletBalancesProps>) {
             </div>
 
             <div className="space-y-2">
-              {balances.map((balance) => {
+              {balances.filter(({ chainId }) => {
+                return chainId === chain.id
+              }).map((balance) => {
                 const balanceId = `${balance.tokenId}-${balance.symbol}`
                 const isOpen = openTransferId === balanceId
 
