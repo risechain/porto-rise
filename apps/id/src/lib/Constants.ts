@@ -1,6 +1,6 @@
 import type { PortoConfig } from '@porto/apps'
 import type { Address } from 'ox'
-import { riseTestnet, sepolia } from 'viem/chains'
+import { rise, riseTestnet, sepolia } from 'viem/chains'
 
 export const CORS_DESTROYER_URL = 'https://cors.porto.workers.dev'
 
@@ -31,6 +31,15 @@ export const defaultAssets: Record<
     coingeckoId?: string
   }>
 > = {
+  [rise.id]: [
+    {
+      address: '0x0000000000000000000000000000000000000000',
+      decimals: 18,
+      logo: '/icons/eth.svg',
+      name: 'Ethereum',
+      symbol: 'ETH',
+    },
+  ],
   [riseTestnet.id]: [
     {
       address: '0x0000000000000000000000000000000000000000',

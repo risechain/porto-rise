@@ -1438,6 +1438,13 @@ export function serializeWebAuthnSignature(
   options: serializeWebAuthnSignature.Options,
 ) {
   const { metadata, signature } = options
+  if (metadata.challengeIndex == null) {
+    throw new Error('metadata.challengeIndex is required')
+  }
+  if (metadata.typeIndex == null) {
+    throw new Error('metadata.typeIndex is required')
+  }
+
   return AbiParameters.encode(
     AbiParameters.from([
       'struct WebAuthnAuth { bytes authenticatorData; string clientDataJSON; uint256 challengeIndex; uint256 typeIndex; bytes32 r; bytes32 s; }',
