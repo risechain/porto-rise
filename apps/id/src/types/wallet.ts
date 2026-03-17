@@ -15,7 +15,7 @@ export type Balance = {
   balanceFormatted: number
   usdValue: number
   isNative: boolean
-  chainId: number
+  chainId?: number
 }
 
 export type Position = {

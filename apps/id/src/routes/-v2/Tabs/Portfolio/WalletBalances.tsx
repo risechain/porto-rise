@@ -60,84 +60,85 @@ export function WalletBalances(props: Readonly<WalletBalancesProps>) {
 
       {hasBalance &&
         !isLoading &&
-        chains?.map((chain) => (
-          <div className="" key={chain.id}>
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <h3 className="font-semibold">{chain.id}</h3>
-                <p className="text-gray10 text-sm">
-                  {balances.length} token
-                  {balances.length !== 1 ? 's' : ''}
-                </p>
+        chains?.map((chain) => {
+          const chainBalances =
+            balances.filter(({ chainId }) => chainId === chain.id);
+          return (
+            <div className="" key={chain.id} >
+              <div className="mb-4 flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold">{chain.id}</h3>
+                  <p className="text-gray10 text-sm">
+                    {chainBalances.length} token
+                    {chainBalances.length !== 1 ? 's' : ''}
+                  </p>
+                </div>
+                <div className="rounded-full bg-violet9/10 px-3 py-1">
+                  <p className="font-mono text-violet9 text-xs">{chain.name}</p>
+                </div>
               </div>
-              <div className="rounded-full bg-violet9/10 px-3 py-1">
-                <p className="font-mono text-violet9 text-xs">{chain.name}</p>
-              </div>
-            </div>
 
-            <div className="space-y-2">
-              {balances.filter(({ chainId }) => {
-                return chainId === chain.id
-              }).map((balance) => {
-                const balanceId = `${balance.tokenId}-${balance.symbol}`
-                const isOpen = openTransferId === balanceId
+              <div className="space-y-2">
+                {chainBalances.map((balance) => {
+                  const balanceId = `${balance.tokenId}-${balance.symbol}`
+                  const isOpen = openTransferId === balanceId
 
-                return (
-                  <div key={balanceId}>
-                    <div
-                      className={cx(
-                        'flex items-center justify-between rounded-lg border border-gray4 p-3 capitalize hover:bg-gray2',
-                        isOpen && 'rounded-b-none bg-gray2',
-                      )}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-violet9 to-violet11">
-                          <span className="font-semibold text-sm text-white">
-                            {balance.symbol.charAt(0)}
-                          </span>
-                        </div>
-                        <div>
-                          <p className="font-medium text-gray12 text-sm">
-                            {balance.symbol}
-                          </p>
-                          <p className="text-gray10 text-xs capitalize">
-                            {balance.tokenId.replace(`${chain.id}-`, '')}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-5">
-                        <div className="text-right">
-                          <p className="font-semibold text-gray12 text-sm">
-                            {balance.balanceFormatted.toFixed(4)}{' '}
-                            <span className="font-normal">
-                              {balance.symbol}
+                  return (
+                    <div key={balanceId}>
+                      <div
+                        className={cx(
+                          'flex items-center justify-between rounded-lg border border-gray4 p-3 capitalize hover:bg-gray2',
+                          isOpen && 'rounded-b-none bg-gray2',
+                        )}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-violet9 to-violet11">
+                            <span className="font-semibold text-sm text-white">
+                              {balance.symbol.charAt(0)}
                             </span>
-                          </p>
-                          <p className="text-gray10 text-xs">
-                            {formatValue(balance.usdValue)}
-                          </p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray12 text-sm">
+                              {balance.symbol}
+                            </p>
+                            <p className="text-gray10 text-xs capitalize">
+                              {balance.tokenId.replace(`${chain.id}-`, '')}
+                            </p>
+                          </div>
                         </div>
-                        <Button
-                          onClick={() => handleTransfer(balance)}
-                          size="small"
-                          title="Transfer"
-                        >
-                          <LucideSend className="size-4" />
-                        </Button>
+                        <div className="flex items-center gap-5">
+                          <div className="text-right">
+                            <p className="font-semibold text-gray12 text-sm">
+                              {balance.balanceFormatted.toFixed(4)}{' '}
+                              <span className="font-normal">
+                                {balance.symbol}
+                              </span>
+                            </p>
+                            <p className="text-gray10 text-xs">
+                              {formatValue(balance.usdValue)}
+                            </p>
+                          </div>
+                          <Button
+                            onClick={() => handleTransfer(balance)}
+                            size="small"
+                            title="Transfer"
+                          >
+                            <LucideSend className="size-4" />
+                          </Button>
+                        </div>
                       </div>
+                      <Transfer
+                        balance={balance}
+                        isOpen={isOpen}
+                        onClose={() => handleCloseTransfer(balance)}
+                        refetch={refetch}
+                      />
                     </div>
-                    <Transfer
-                      balance={balance}
-                      isOpen={isOpen}
-                      onClose={() => handleCloseTransfer(balance)}
-                      refetch={refetch}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        ))}
-    </div>
+                  )
+                })}
+              </div>
+            </div>);
+        })}
+    </div >
   )
 }
