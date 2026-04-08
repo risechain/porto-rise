@@ -203,6 +203,7 @@ export function App() {
           <hr />
         </div>
         <ShowClientCapabilities />
+        {/* TEMP: Test section for ETH + ERC20 sends — remove when done */}
       </div>
       {mode === 'inline-dialog' && (
         <div className="fixed top-0 bottom-0 left-[calc(768px+var(--spacing)*2)] w-[362px] p-4">
@@ -1427,7 +1428,6 @@ function SignMessage() {
         style={{
           maxWidth: '500px',
           overflowWrap: 'anywhere',
-          // @ts-expect-error
           textWrapMode: 'wrap',
         }}
       >
@@ -2399,3 +2399,4 @@ const getPermit2Data = (
 
 const isExpChainId = (chainId: number): chainId is keyof typeof exp1Address =>
   Object.hasOwn(exp1Address, chainId)
+

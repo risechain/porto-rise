@@ -2,7 +2,8 @@ import { Button, ButtonArea, ChainsPath, CopyButton, Details } from '@porto/ui'
 import type { Address } from 'ox'
 import * as React from 'react'
 import type * as Rpc from 'rise-wallet/core/internal/schema/request'
-import type { Chain } from 'viem'
+import { type Chain, erc20Abi } from 'viem'
+import { useReadContracts } from 'wagmi'
 import { AddressFormatter, PriceFormatter, ValueFormatter } from '~/utils'
 import LucideArrowUpRight from '~icons/lucide/arrow-up-right'
 import LucideSendHorizontal from '~icons/lucide/send-horizontal'
@@ -26,6 +27,41 @@ export function Send(props: Send.Props) {
 
   const fees = capabilities?.feeTotals
   const loading = !capabilities
+
+  const chainId = chainsPath[0]?.id
+  const needsTokenInfo =
+    asset.type === 'erc20' && (!asset.symbol || !asset.name) && Boolean(asset.address)
+
+  const tokenInfo = useReadContracts({
+    allowFailure: true,
+    contracts: [
+      {
+        abi: erc20Abi,
+        address: asset.address ?? undefined,
+        chainId: chainId as never,
+        functionName: 'symbol',
+      },
+      {
+        abi: erc20Abi,
+        address: asset.address ?? undefined,
+        chainId: chainId as never,
+        functionName: 'name',
+      },
+    ],
+    query: {
+      enabled: needsTokenInfo && Boolean(chainId),
+      select: ([symbol, name]) => ({
+        name: name.result,
+        symbol: symbol.result,
+      }),
+    },
+  })
+
+  const resolvedAsset = {
+    ...asset,
+    name: asset.name || tokenInfo.data?.name || undefined,
+    symbol: asset.symbol || tokenInfo.data?.symbol || asset.symbol,
+  }
 
   const [currencyType, setCurrencyType] = React.useState<'fiat' | 'token'>(
     asset.fiat ? 'fiat' : 'token',
@@ -101,7 +137,7 @@ export function Send(props: Send.Props) {
             </div>
             <div className="flex flex-grow flex-col justify-center whitespace-nowrap">
               <div className="font-medium text-[14px] text-th_base">
-                Send {asset.symbol}
+                Send {resolvedAsset.symbol}
               </div>
               <div className="flex items-center gap-[4px] text-[12px] text-th_base-secondary">
                 <span>to</span>
@@ -114,7 +150,7 @@ export function Send(props: Send.Props) {
               </div>
             </div>
             <Send.AmountButton
-              asset={asset}
+              asset={resolvedAsset}
               currencyType={currencyType}
               onToggleCurrency={toggle}
             />
